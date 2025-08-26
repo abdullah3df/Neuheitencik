@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CIK — Community Chick Coin</title>
+  <meta name="description" content="CIK ($CIK) — bright, fast, community-first meme token. No promises, just vibes." />
+  <meta name="theme-color" content="#F8CF4A" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23FFD978'/%3E%3Cstop offset='1' stop-color='%23D9A82E'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='16' cy='16' r='16' fill='url(%23g)'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- NAV -->
+  <nav class="nav nav-3d">
+    <div class="container nav-wrap">
+      <a href="#home" class="brand">
+        <span class="brand-mark"></span>
+        <b>CIK</b>
+      </a>
+      <div class="menu" id="menu-desktop">
+        <a class="nav-link" href="#about">About</a>
+        <a class="nav-link" href="#how">How to Buy</a>
+        <a class="nav-link" href="#roadmap">Roadmap</a>
+        <a class="nav-link" href="#community">Community</a>
+        <a class="cta btn-gloss" id="buy" href="#" target="_blank" rel="noopener">Buy $CIK</a>
+      </div>
+      <input id="nav-toggle" type="checkbox" aria-label="Toggle menu"/>
+      <label class="hamb" for="nav-toggle" aria-label="Open menu"><span class="bar"></span></label>
+    </div>
+    <div class="menu-mobile">
+      <div class="panel container">
+        <a class="nav-link" href="#about" onclick="navOff()">About</a>
+        <a class="nav-link" href="#how" onclick="navOff()">How to Buy</a>
+        <a class="nav-link" href="#roadmap" onclick="navOff()">Roadmap</a>
+        <a class="nav-link" href="#community" onclick="navOff()">Community</a>
+        <a class="cta btn-gloss" href="#" target="_blank" rel="noopener" onclick="navOff()">Buy $CIK</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero" id="home">
+    <div class="glow parallax" data-speed="0.15"></div>
+    <div class="container hero-wrap">
+      <div class="copy">
+        <span class="pill">🐥 $CIK • Community Chick Coin</span>
+        <h1 class="title">A cheerful chick bringing <span class="gradient">memes, vibes, and fun</span> to crypto.</h1>
+        <p class="lead">Community-driven, simple and transparent. No hypey promises — just consistent delivery, clean design, and good energy.</p>
+        <div class="actions">
+          <a class="cta btn-gloss" href="#" target="_blank" rel="noopener">Buy on DEX</a>
+          <a class="ghost btn-3d" href="#community">Join Telegram</a>
+        </div>
+      </div>
+
+      <aside class="hero-card reveal card-3d" aria-label="Why CIK">
+        <h3>Why CIK?</h3>
+        <ul class="ticks">
+          <li>Glossy gold brand & fast site</li>
+          <li>Fair, community-first approach</li>
+          <li>Transparent updates</li>
+        </ul>
+      </aside>
+    </div>
+  </header>
+
+  <!-- ABOUT -->
+  <section id="about" class="sect container">
+    <h2 class="subtitle">About</h2>
+    <div class="grid">
+      <div class="card reveal card-3d">
+        <h3>Essence</h3>
+        <p>CIK embraces internet culture with a bright, cheerful identity. Built for fun and community engagement. Keep it light, keep it fair.</p>
+      </div>
+      <div class="card reveal card-3d">
+        <h3>Values</h3>
+        <p>Clarity over noise. We focus on community activities, simple mechanics, and transparent communication.</p>
+      </div>
+      <div class="card reveal card-3d">
+        <h3>Disclaimer</h3>
+        <p>Entertainment project. Crypto is volatile — only invest what you can afford to lose.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW TO BUY -->
+  <section id="how" class="sect container">
+    <h2 class="subtitle">How to Buy</h2>
+    <ol class="steps card reveal card-3d" aria-label="Steps to buy">
+      <li>Install a wallet (e.g., MetaMask / Phantom).</li>
+      <li>Add funds of the chain’s native token.</li>
+      <li>Open the DEX link and import the $CIK contract.</li>
+      <li>Confirm the swap and you’re in.</li>
+    </ol>
+  </section>
+
+  <!-- ROADMAP -->
+  <section id="roadmap" class="sect container">
+    <h2 class="subtitle">Roadmap</h2>
+    <div class="road">
+      <div class="mile reveal">
+        <div class="bubble card-3d"><h4>Phase 1 — Launch</h4><p>Website live, socials open, initial meme push.</p></div>
+        <div class="dot"></div>
+      </div>
+      <div class="mile reveal">
+        <div class="dot"></div>
+        <div class="bubble card-3d"><h4>Phase 2 — Growth</h4><p>Community contests, listings on trackers, collabs.</p></div>
+      </div>
+      <div class="mile reveal">
+        <div class="bubble card-3d"><h4>Phase 3 — Momentum</h4><p>Merch drops, mini utilities, expanding holders.</p></div>
+        <div class="dot"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMMUNITY -->
+  <section id="community" class="sect container">
+    <h2 class="subtitle">Community</h2>
+    <div class="grid">
+      <!-- TODO: ضع رابط كروب التلغرام هنا -->
+      <a class="card link reveal card-3d" href="#" target="_blank" rel="noopener">
+        <h3>Telegram</h3><p>Live chat, announcements & giveaways.</p>
+      </a>
+      <!-- TODO: ضع رابط تويتر/X هنا -->
+      <a class="card link reveal card-3d" href="#" target="_blank" rel="noopener">
+        <h3>Twitter / X</h3><p>Memes, threads, and updates.</p>
+      </a>
+      <!-- TODO: ضع رابط العقد (BscScan) هنا -->
+      <a class="card link reveal card-3d" href="#" target="_blank" rel="noopener">
+        <h3>Contract</h3><p>Add your official contract & explorer link.</p>
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container foot">
+      <div>© <span id="year"></span> CIK. All rights reserved.</div>
+      <div class="muted">For fun & entertainment only. Crypto is risky.</div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
