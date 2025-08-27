@@ -7,13 +7,14 @@
   <meta name="description" content="Chick Coin (CIK) — a playful meme coin for fun and community vibes. ⚠️ Crypto is risky." />
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;700;900&display=swap" rel="stylesheet">
 
-  <!-- Critical CSS (preloader + lock scroll to avoid black flash) -->
+  <!-- Critical CSS (preloader basics + lock scroll) -->
   <style>
     #preloader{position:fixed;inset:0;background:#fff9e8;display:flex;align-items:center;justify-content:center;z-index:2000}
     #preloader .loader{text-align:center}
     #preloader #progress{font:900 1.4rem "Nunito",sans-serif;color:#6b5730;margin-top:12px}
     .no-scroll, .no-scroll body {overflow:hidden;height:100%}
-    /* basic animation so preloader moves even before style.css loads */
+
+    /* basic motions so preloader animates even before style.css loads */
     .egg{width:140px;height:190px;position:relative;display:inline-block;animation:eggShake 1.2s ease-in-out infinite}
     #chick{position:absolute;left:50%;top:60%;transform:translate(-50%,-50%) scale(0);font-size:3.4rem;opacity:0}
     @keyframes eggShake{
@@ -24,7 +25,7 @@
       60%{transform:translateY(0) rotate(2deg)}
       75%{transform:translateY(-1px) rotate(-1deg)}
     }
-    /* crack + hatch immediate states (for fallback) */
+    /* crack + hatch states (fallback) */
     #preloader.show-crack #crack{opacity:1;animation:drawCrack .8s ease forwards}
     @keyframes drawCrack{to{stroke-dashoffset:0}}
     #preloader.hatch .egg{animation:none}
@@ -40,14 +41,12 @@
 </head>
 <body class="theme-chick">
 
-  <!-- ===== PRELOADER (Whole egg -> crack -> split) ===== -->
+  <!-- ===== PRELOADER (Whole egg -> crack -> split + feathers) ===== -->
   <div id="preloader" aria-hidden="true">
     <div class="loader">
       <div class="egg">
         <svg class="egg-svg" width="140" height="180" viewBox="0 0 140 180" xmlns="http://www.w3.org/2000/svg">
-          <!-- glow -->
           <ellipse cx="70" cy="95" rx="36" ry="46" fill="#FFE59A" opacity=".28"/>
-          <!-- WHOLE EGG -->
           <defs>
             <radialGradient id="shellGrad" cx="35%" cy="25%" r="90%">
               <stop offset="0%" stop-color="#FFFFFF"/>
@@ -58,11 +57,9 @@
           <path id="eggWhole"
                 d="M70 18 C36 18, 12 52, 12 92 C12 132, 36 162, 70 162 C104 162, 128 132, 128 92 C128 52, 104 18, 70 18 Z"
                 fill="url(#shellGrad)" stroke="#F2E0A9" stroke-width="2"/>
-          <!-- CRACK (hidden until 60%) -->
           <path id="crack" d="M25 95 L40 88 L50 98 L60 86 L70 100 L80 86 L90 98 L100 88 L115 95"
                 fill="none" stroke="#D9B871" stroke-width="3" stroke-linejoin="round"
                 stroke-dasharray="260" stroke-dashoffset="260" opacity="0"/>
-          <!-- SPLIT HALVES (hidden until hatch) -->
           <path id="leftHalf"
                 d="M70 18 C36 18, 12 52, 12 92 C12 132, 36 162, 70 162 L70 100 L62 106 L54 94 L46 104 L38 92 L30 102 L24 94 L20 102 L18 96 C18 70, 34 38, 70 18 Z"
                 fill="url(#shellGrad)" stroke="#F2E0A9" stroke-width="2" opacity="0"/>
@@ -179,6 +176,19 @@
       if(p >= 60 && !pre.classList.contains('show-crack')) pre.classList.add('show-crack');
       if(p === 100){
         pre.classList.add('hatch');
+
+        /* 🪶 Feathers on hatch (fallback too) */
+        for (var i=0;i<12;i++){
+          var feather=document.createElement('div');
+          feather.className='feather';
+          feather.textContent='🪶';
+          feather.style.left=(Math.random()*100)+'vw';
+          feather.style.fontSize=(Math.random()*1+0.8)+'rem';
+          feather.style.animationDuration=(Math.random()*2+3)+'s';
+          document.body.appendChild(feather);
+          feather.addEventListener('animationend', (function(f){ return function(){ f.remove(); };})(feather));
+        }
+
         setTimeout(function(){
           pre.style.transition = 'opacity .6s ease';
           pre.style.opacity = '0';
