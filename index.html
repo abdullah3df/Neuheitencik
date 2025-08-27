@@ -8,7 +8,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
   <style>
     :root{
-      /* refined palette */
       --bg1:#fff9e6; --bg2:#fff0c7; --bg3:#ffe075;
       --gold:#f4c84f; --gold-mid:#f0bd3a; --gold-dark:#d19a22;
       --ink:#221a05; --muted:#6e5c24; --ring:#e6cf8a;
@@ -55,7 +54,6 @@
       background:#fffdf7cc;color:var(--muted);font-weight:700
     }
     h1{margin:16px 0 6px;font-size:clamp(2.1rem,6vw,3.4rem);font-weight:900;letter-spacing:.2px}
-    /* animated letters */
     h1 .letter{
       display:inline-block;opacity:0;transform:translateY(16px) rotate(-2deg);
       animation:floatIn .8s forwards;animation-delay:var(--d);
@@ -66,44 +64,57 @@
     h1 .letter:hover{animation:wiggle .6s; filter:drop-shadow(0 4px 16px rgba(210,154,34,.45))}
     @keyframes floatIn{from{opacity:0;transform:translateY(18px) rotate(-5deg) scale(.96)}to{opacity:1;transform:none}}
     @keyframes wiggle{0%{transform:none}40%{transform:translateY(-6px) rotate(2deg)}100%{transform:none}}
-
     .lead{color:var(--muted); font-weight:700; margin:4px 0 18px}
     .actions{display:flex;gap:12px;flex-wrap:wrap}
     .btn{padding:12px 18px;border-radius:14px;font-weight:800;transition:.2s;box-shadow:var(--shadow),inset 0 1px 0 #fff6}
     .btn-ghost{border:1px solid var(--ring);background:#fffaf0cc;color:var(--muted)}
     .btn-ghost:hover{transform:translateY(-2px);box-shadow:0 16px 36px rgba(0,0,0,.12)}
 
-    /* CARDS */
+    /* GRID & CARDS */
     .grid{display:grid;gap:16px;margin:24px 0;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
     .card{background:#fffefb;border:1px solid var(--ring);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
     .card h3{margin:6px 0 10px}
     .card p{margin:0 0 12px;color:#4e3f18;overflow-wrap:break-word;word-break:break-word}
-    .btn-primary{
-      background:linear-gradient(135deg,var(--gold),var(--gold-mid),var(--gold-dark));
-      color:#2b2207
-    }
+
+    /* BUY BUTTON & DISCLAIMER */
+    .btn-primary{background:linear-gradient(135deg,var(--gold),var(--gold-mid),var(--gold-dark));color:#2b2207}
     .btn-primary:hover{transform:translateY(-2px);box-shadow:0 18px 42px rgba(209,154,34,.32),inset 0 1px 0 #fff6}
     .card.buy .btn-primary{width:100%;display:block;text-align:center}
     .card.disclaimer{background:#fff1ea;border-color:#f2c3b0}
     .card.disclaimer h3{color:#8b2f1f}
     .card.disclaimer p{color:#6b3a2a}
 
-    /* CHICK SVG above Buy button */
-    .chick-wrap{
-      width:64px; height:64px; margin:6px auto 10px; position:relative;
+    /* CHICK MASCOT (professional, with smooth float + tilt) */
+    .chick-anim{
+      width:64px; height:64px; margin:6px auto 10px;
       filter: drop-shadow(0 6px 14px rgba(209,154,34,.35));
-      animation: bob 2.2s ease-in-out infinite;
+      animation: floaty 3s ease-in-out infinite;
     }
-    @keyframes bob{
-      0%,100%{ transform: translateY(0) }
-      50%{ transform: translateY(-6px) }
+    .chick-tilt{
+      width:64px; height:64px; display:block; transform-origin:50% 55%;
+      animation: tilt 4s ease-in-out infinite;
     }
-    /* subtle hover lift for button + chick */
-    .card.buy:hover .chick-wrap{ animation-duration: 1.8s; }
-    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    @keyframes floaty{ 0%,100%{ transform: translateY(0) } 50%{ transform: translateY(-8px) } }
+    @keyframes tilt  { 0%,100%{ transform: rotate(0deg) } 25%{ transform: rotate(3deg) } 75%{ transform: rotate(-3deg) } }
+    .card.buy:hover .chick-anim{ animation-duration: 2.2s }
+
+    /* ACCOUNTS */
+    #accounts{padding:30px 0}
 
     /* FOOTER */
     footer{margin-top:30px;padding:18px 0;text-align:center;font-size:.9rem;color:var(--muted);border-top:1px solid var(--ring)}
+
+    /* RESPONSIVE */
+    @media (max-width:640px){
+      .menu{display:none}
+      h1{font-size:clamp(1.8rem,7vw,3rem)}
+      .grid{grid-template-columns:1fr}
+    }
+
+    /* REDUCED MOTION */
+    @media (prefers-reduced-motion: reduce){
+      *,*::before,*::after{animation:none!important;transition:none!important}
+    }
   </style>
 </head>
 <body>
@@ -147,34 +158,33 @@
           <p>Swap for CIK on PancakeSwap.</p>
           <p><b>Contract:</b><br>0x182976Fac92c6282C4afA9f63B3FF52F8E54570d</p>
 
-          <!-- Chic SVG above the button -->
-          <div class="chick-wrap" aria-hidden="true">
-            <svg viewBox="0 0 120 120" width="64" height="64" role="img">
-              <title>Chick</title>
-              <!-- body -->
+          <!-- Chick mascot (clear + professional) -->
+          <div class="chick-anim" aria-hidden="true">
+            <svg class="chick-tilt" viewBox="0 0 120 120" role="img">
+              <title>Chick Mascot</title>
               <defs>
                 <radialGradient id="gBody" cx="40%" cy="35%" r="70%">
-                  <stop offset="0%" stop-color="#fff4c7"/>
+                  <stop offset="0%" stop-color="#fff7c9"/>
                   <stop offset="60%" stop-color="#f4c84f"/>
                   <stop offset="100%" stop-color="#d19a22"/>
                 </radialGradient>
               </defs>
-              <circle cx="60" cy="64" r="34" fill="url(#gBody)"/>
-              <!-- head -->
-              <circle cx="60" cy="42" r="22" fill="url(#gBody)"/>
-              <!-- eye -->
-              <circle cx="67" cy="40" r="3.2" fill="#2b2207"/>
+              <!-- body + head -->
+              <circle cx="60" cy="68" r="32" fill="url(#gBody)"/>
+              <circle cx="60" cy="44" r="22" fill="url(#gBody)"/>
+              <!-- eyes -->
+              <circle cx="52" cy="42" r="3.2" fill="#2b2207"/>
+              <circle cx="68" cy="42" r="3.2" fill="#2b2207"/>
               <!-- beak -->
-              <polygon points="54,44 66,49 54,54" fill="#e28922"/>
+              <polygon points="56,50 64,50 60,58" fill="#e68a00"/>
               <!-- wing -->
-              <ellipse cx="42" cy="66" rx="10" ry="8" fill="#f0bd3a" transform="rotate(-18 42 66)"/>
+              <ellipse cx="44" cy="70" rx="10" ry="8" fill="#f0bd3a" transform="rotate(-18 44 70)"/>
               <!-- feet -->
-              <line x1="52" y1="92" x2="48" y2="104" stroke="#b27717" stroke-width="3" stroke-linecap="round"/>
-              <line x1="68" y1="92" x2="72" y2="104" stroke="#b27717" stroke-width="3" stroke-linecap="round"/>
+              <line x1="52" y1="96" x2="48" y2="108" stroke="#b27717" stroke-width="3" stroke-linecap="round"/>
+              <line x1="68" y1="96" x2="72" y2="108" stroke="#b27717" stroke-width="3" stroke-linecap="round"/>
               <!-- sparkle -->
-              <circle cx="78" cy="28" r="3" fill="#fff6cc"/>
+              <circle cx="80" cy="28" r="3" fill="#fff6cc"/>
             </svg>
-            <span class="sr-only">Chick mascot highlighting the Buy button</span>
           </div>
 
           <a class="btn btn-primary" href="https://pancakeswap.finance/swap?outputCurrency=0x182976Fac92c6282C4afA9f63B3FF52F8E54570d" target="_blank" rel="noopener">Buy Now</a>
@@ -198,7 +208,7 @@
   </main>
 
   <!-- OFFICIAL ACCOUNTS -->
-  <section id="accounts" class="container" style="padding:30px 0">
+  <section id="accounts" class="container">
     <h2>Official Accounts</h2>
     <div class="grid">
       <a class="card" href="https://t.me/cik3000" target="_blank" rel="noopener">
@@ -224,7 +234,7 @@
     // Year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Interactive Gradient Title (brand + slogan)
+    // Interactive title
     (function(){
       const title = document.getElementById('animatedTitle');
       const text = title.textContent.trim();
