@@ -31,16 +31,17 @@ nav{
   background:radial-gradient(circle at 30% 30%,#fff6cc,var(--gold));
   box-shadow:0 0 12px color-mix(in oklab, var(--gold), transparent 50%)}
 .menu{display:flex;gap:16px;align-items:center}
-.menu a{font-weight:700;position:relative;opacity:.95;transition:.25s}
-.menu a:hover{opacity:1;transform:translateY(-2px);color:var(--gold)}
-/* ❌ ألغيت الخط الأصفر القديم */
-/* بداله أضفت توهج بسيط */
-.menu a::after{
-  content:"";position:absolute;left:0;right:0;bottom:-2px;
-  height:2px;border-radius:2px;background:var(--gold);
-  opacity:0;transition:.25s;
+.menu a{
+  font-weight:700;
+  position:relative;
+  opacity:.95;
+  transition:.25s;
 }
-.menu a:hover::after{opacity:1}
+.menu a:hover{
+  opacity:1;
+  transform:translateY(-2px);
+  color:var(--gold);
+}
 
 /* HERO */
 header{padding:62px 0 30px}
@@ -111,4 +112,4 @@ footer{margin-top:30px;padding:18px 0;text-align:center;font-size:.9rem;color:va
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{animation:none !important;transition:none !important}
   h1 .letter{opacity:1;transform:none}
-}
+                }
