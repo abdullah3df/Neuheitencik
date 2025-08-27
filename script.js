@@ -2,32 +2,36 @@
 const y = document.getElementById('year');
 if (y) y.textContent = new Date().getFullYear();
 
-/* ===== Preloader: Egg -> Chick at 100% ===== */
+/* ===== Preloader: progress + cracking egg + chick pop ===== */
 (function(){
   const progressEl = document.getElementById("progress");
-  const eggEl = document.getElementById("egg");
-  const preloader = document.getElementById("preloader");
-  if (!progressEl || !eggEl || !preloader) return;
+  const preloader  = document.getElementById("preloader");
+  const chickEl    = document.getElementById("chick");
+  if (!progressEl || !preloader || !chickEl) return;
 
   let progress = 0;
+
   const step = () => {
-    progress += 2;                 // سرعة الزيادة (2%)
+    progress += 2;                     // increment %
     if (progress > 100) progress = 100;
     progressEl.textContent = progress + "%";
 
     if (progress === 100) {
-      eggEl.textContent = "🐥";
-      eggEl.style.transform = "scale(1.2)";
+      // trigger crack animation
+      preloader.classList.add('hatch');
+      // fade out after the animation
       setTimeout(() => {
         preloader.style.transition = "opacity 0.6s ease";
         preloader.style.opacity = "0";
-        setTimeout(() => { preloader.style.display = "none"; }, 600);
-      }, 800);
+        setTimeout(() => {
+          preloader.style.display = "none";
+          document.documentElement.classList.remove('no-scroll'); // enable scroll
+        }, 600);
+      }, 950); // wait for crack+chick animation
     } else {
-      setTimeout(step, 80);        // كل 80ms
+      setTimeout(step, 80);            // speed
     }
   };
-  // بدء العدّاد فور تحميل DOM
   step();
 })();
 
@@ -43,7 +47,7 @@ if (y) y.textContent = new Date().getFullYear();
                  window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   const words = text.split(' ');
-  let i = 0; // letter index for stagger
+  let i = 0;
 
   words.forEach((w, wi) => {
     const wSpan = document.createElement('span');
