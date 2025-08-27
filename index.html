@@ -1,149 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark-lux">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>CIK — Community-First Meme Coin</title>
-  <meta name="description" content="CIK — a meme coin for fun and community vibes. ⚠️ Crypto is risky." />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
-  <style>
-    /* ========= THEME TOKENS ========= */
-    :root{
-      --radius:18px; --shadow:0 18px 60px rgba(0,0,0,.12);
-      /* defaults get overridden by [data-theme] below */
-      --bg1:#fff9e6; --bg2:#fff0c7; --bg3:#ffe075;
-      --ink:#221a05; --muted:#6e5c24; --ring:#e6cf8a;
-      --gold:#f4c84f; --gold-mid:#f0bd3a; --gold-dark:#d19a22;
-      /* animated headline gradient */
-      --headline-from:#f4c84f; --headline-to:#d19a22;
-    }
-    /* LIGHT GOLD */
-    html[data-theme="gold-light"]{
-      --bg1:#fff9e6; --bg2:#fff0c7; --bg3:#ffe075;
-      --ink:#221a05; --muted:#6e5c24; --ring:#e6cf8a;
-      --gold:#f4c84f; --gold-mid:#f0bd3a; --gold-dark:#d19a22;
-      --headline-from:#f7d774; --headline-to:#c99518;
-    }
-    /* DARK LUXURY (default) */
-    html[data-theme="dark-lux"]{
-      --bg1:#0f0e0b; --bg2:#17140f; --bg3:#1e1a12;
-      --ink:#f7f2de; --muted:#c9b886; --ring:#3b311b;
-      --gold:#f3c94d; --gold-mid:#d9ae2f; --gold-dark:#b4891d;
-      --headline-from:#f7d774; --headline-to:#d3a220;
-    }
-    /* AQUA FRESH */
-    html[data-theme="aqua-fresh"]{
-      --bg1:#ecfdff; --bg2:#d8f7ff; --bg3:#c6f0ff;
-      --ink:#0f1b22; --muted:#345a67; --ring:#aee8f7;
-      --gold:#27c1ff; --gold-mid:#17a7e5; --gold-dark:#0e83ba;
-      --headline-from:#66e0ff; --headline-to:#0e83ba;
-    }
-
-    *{box-sizing:border-box}
-    body{
-      margin:0; font-family:"Outfit",system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Arial,sans-serif;
-      color:var(--ink); line-height:1.65;
-      background:
-        radial-gradient(1200px 700px at 18% -10%, var(--bg2) 0%, transparent 60%),
-        radial-gradient(1200px 700px at 115% 0%, var(--bg3) 0%, transparent 55%),
-        radial-gradient(circle at 30% 20%, var(--bg1) 0%, var(--bg2) 40%, var(--bg3) 100%);
-    }
-    a{color:inherit; text-decoration:none}
-    .container{max-width:1100px;margin:auto;padding:0 18px}
-
-    /* NAV */
-    nav{
-      position:sticky; top:0; z-index:1000;
-      backdrop-filter:blur(8px) saturate(140%);
-      background:linear-gradient(180deg, color-mix(in oklab, var(--bg1), #fff 8%) 60%, transparent);
-      border-bottom:1px solid var(--ring);
-    }
-    .nav-wrap{display:flex;justify-content:space-between;align-items:center;height:64px}
-    .brand{font-weight:900;display:flex;align-items:center;gap:8px}
-    .dot{width:14px;height:14px;border-radius:50%;
-      background:radial-gradient(circle at 30% 30%,#fff6cc,var(--gold));
-      box-shadow:0 0 12px color-mix(in oklab, var(--gold), transparent 50%)}
-    .menu{display:flex;gap:16px;align-items:center}
-    .menu a{font-weight:700;position:relative;opacity:.95;transition:.2s}
-    .menu a:hover{opacity:1;transform:translateY(-2px)}
-    .menu a::after{
-      content:"";position:absolute;left:6px;right:6px;bottom:4px;height:3px;border-radius:3px;
-      background:linear-gradient(90deg,var(--gold),var(--gold-dark));
-      transform:scaleX(.15);transform-origin:left;transition:.25s
-    }
-    .menu a:hover::after{transform:scaleX(1)}
-
-    /* HERO */
-    header{padding:62px 0 30px}
-    .badge{display:inline-block;padding:8px 12px;border:1px solid var(--ring);border-radius:999px;
-      background:color-mix(in oklab, var(--bg1), #fff 14%); color:var(--muted); font-weight:700}
-    h1{margin:16px 0 6px;font-size:clamp(2.1rem,6vw,3.4rem);font-weight:900;letter-spacing:.2px}
-    h1 .letter{
-      display:inline-block;opacity:0;transform:translateY(16px) rotate(-2deg);
-      animation:floatIn .8s forwards;animation-delay:var(--d);
-      background:linear-gradient(90deg,var(--headline-from),var(--headline-to));
-      -webkit-background-clip:text;background-clip:text;color:transparent
-    }
-    h1.ready .letter{opacity:1}
-    h1 .letter:hover{animation:wiggle .6s; filter:drop-shadow(0 4px 16px color-mix(in oklab, var(--headline-to), transparent 50%))}
-    @keyframes floatIn{from{opacity:0;transform:translateY(18px) rotate(-5deg) scale(.96)}to{opacity:1;transform:none}}
-    @keyframes wiggle{0%{transform:none}40%{transform:translateY(-6px) rotate(2deg)}100%{transform:none}}
-    .lead{color:var(--muted);font-weight:700;margin:4px 0 18px}
-    .actions{display:flex;gap:12px;flex-wrap:wrap}
-    .btn{padding:12px 18px;border-radius:14px;font-weight:800;transition:.2s;box-shadow:var(--shadow),inset 0 1px 0 #fff2}
-    .btn-ghost{border:1px solid var(--ring);background:color-mix(in oklab, var(--bg1), #fff 10%);color:var(--muted)}
-    .btn-ghost:hover{transform:translateY(-2px);box-shadow:0 16px 36px rgba(0,0,0,.12)}
-
-    /* GRID & CARDS */
-    .grid{display:grid;gap:16px;margin:24px 0;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
-    .card{background:color-mix(in oklab, var(--bg1), #fff 14%);border:1px solid var(--ring);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
-    .card h3{margin:6px 0 10px}
-    .card p{margin:0 0 12px;color:color-mix(in oklab, var(--ink), #000 10%);overflow-wrap:break-word;word-break:break-word}
-
-    /* BUY Button — premium glow */
-    .btn-primary{
-      position:relative; isolation:isolate;
-      background:linear-gradient(135deg,var(--gold),var(--gold-mid),var(--gold-dark));
-      color:color-mix(in oklab, var(--ink), #000 30%); width:100%; display:block; text-align:center; border-radius:14px;
-      overflow:hidden;
-    }
-    .btn-primary::before{
-      content:""; position:absolute; inset:-2px; z-index:-1; border-radius:16px;
-      background:radial-gradient(60% 60% at 50% 50%, color-mix(in oklab, var(--gold), transparent 40%), transparent 70%);
-      filter:blur(10px); opacity:.8; animation:glow 2.4s ease-in-out infinite;
-    }
-    .btn-primary::after{
-      content:""; position:absolute; top:0; bottom:0; width:120px; transform:skewX(-20deg);
-      background:linear-gradient(90deg, transparent 0%, #ffffff66 45%, #ffffffaa 50%, #ffffff66 55%, transparent 100%);
-      left:-200px; animation:shine 3.2s ease-in-out infinite;
-    }
-    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 18px 42px rgba(0,0,0,.28),inset 0 1px 0 #fff6}
-    @keyframes glow{0%,100%{opacity:.65}50%{opacity:1}}
-    @keyframes shine{0%{left:-220px}60%{left:140%}100%{left:140%}}
-
-    .card.disclaimer{background:color-mix(in oklab, #ffefe8, #fff 10%);border-color:color-mix(in oklab, #f2c3b0, #000 10%)}
-    .card.disclaimer h3{color:#8b2f1f}
-    .card.disclaimer p{color:#6b3a2a}
-
-    /* ACCOUNTS */
-    #accounts{padding:30px 0}
-
-    /* FOOTER */
-    footer{margin-top:30px;padding:18px 0;text-align:center;font-size:.9rem;color:var(--muted);border-top:1px solid var(--ring)}
-
-    /* RESPONSIVE */
-    @media (max-width:640px){
-      .menu{display:flex}
-      h1{font-size:clamp(1.8rem,7vw,3rem)}
-      .grid{grid-template-columns:1fr}
-    }
-
-    /* REDUCED MOTION */
-    @media (prefers-reduced-motion: reduce){
-      *,*::before,*::after{animation:none !important;transition:none !important}
-      h1 .letter{opacity:1;transform:none}
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <!-- NAV -->
@@ -175,20 +37,19 @@
   <main class="container">
     <section id="about">
       <div class="grid">
-        <div class="card">
+        <div class="card interactive">
           <h3>What is CIK?</h3>
           <p>CIK is a <b>meme coin</b> built for fun, memes, and community vibes. It’s simple, playful, and transparent.</p>
         </div>
 
-        <!-- BUY -->
-        <div class="card buy" id="buy">
+        <div class="card interactive" id="buy">
           <h3>Ready to Buy?</h3>
           <p>Swap for CIK on PancakeSwap.</p>
           <p><b>Contract:</b><br>0x182976Fac92c6282C4afA9f63B3FF52F8E54570d</p>
           <a class="btn btn-primary" href="https://pancakeswap.finance/swap?outputCurrency=0x182976Fac92c6282C4afA9f63B3FF52F8E54570d" target="_blank" rel="noopener">Buy Now</a>
         </div>
 
-        <div class="card disclaimer">
+        <div class="card interactive disclaimer">
           <h3>Risk Disclaimer</h3>
           <p>⚠️ Crypto is highly volatile and risky. CIK is an entertainment project (meme coin), not financial advice. Only invest what you can afford to lose.</p>
         </div>
@@ -198,9 +59,9 @@
     <section id="how">
       <h2>How to Buy</h2>
       <div class="grid">
-        <div class="card"><h3>1) Wallet</h3><p>Install a wallet like MetaMask or Phantom.</p></div>
-        <div class="card"><h3>2) Funds</h3><p>Load your wallet with the chain’s native token (e.g. BNB).</p></div>
-        <div class="card"><h3>3) Swap</h3><p>Import the CIK contract on the DEX and confirm the trade.</p></div>
+        <div class="card interactive"><h3>1) Wallet</h3><p>Install a wallet like MetaMask or Phantom.</p></div>
+        <div class="card interactive"><h3>2) Funds</h3><p>Load your wallet with the chain’s native token (e.g. BNB).</p></div>
+        <div class="card interactive"><h3>3) Swap</h3><p>Import the CIK contract on the DEX and confirm the trade.</p></div>
       </div>
     </section>
   </main>
@@ -209,16 +70,16 @@
   <section id="accounts" class="container">
     <h2>Official Accounts</h2>
     <div class="grid">
-      <a class="card" href="https://t.me/cik3000" target="_blank" rel="noopener">
+      <a class="card interactive" href="https://t.me/cik3000" target="_blank" rel="noopener">
         <h3>Telegram</h3><p>Join our community</p>
       </a>
-      <a class="card" href="https://x.com/cik_coin" target="_blank" rel="noopener">
+      <a class="card interactive" href="https://x.com/cik_coin" target="_blank" rel="noopener">
         <h3>Twitter / X</h3><p>Follow updates & memes</p>
       </a>
-      <a class="card" href="https://bscscan.com/token/0x182976Fac92c6282C4afA9f63B3FF52F8E54570d" target="_blank" rel="noopener">
+      <a class="card interactive" href="https://bscscan.com/token/0x182976Fac92c6282C4afA9f63B3FF52F8E54570d" target="_blank" rel="noopener">
         <h3>Contract</h3><p>View on BscScan</p>
       </a>
-      <a class="card" href="mailto:Info.cik@cikcoin.art">
+      <a class="card interactive" href="mailto:Info.cik@cikcoin.art">
         <h3>Email</h3><p>Info.cik@cikcoin.art</p>
       </a>
     </div>
@@ -228,24 +89,6 @@
     © <span id="year"></span> CIK — For entertainment only. Crypto is risky.
   </footer>
 
-  <script>
-    // year
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // animated headline (letters)
-    (function(){
-      const title = document.getElementById('animatedTitle');
-      const text = title.textContent.trim();
-      title.textContent = "";
-      [...text].forEach((ch,i)=>{
-        const span = document.createElement('span');
-        span.className = 'letter';
-        span.style.setProperty('--d', `${i*50}ms`);
-        span.textContent = ch;
-        title.appendChild(span);
-      });
-      requestAnimationFrame(()=>title.classList.add('ready'));
-    })();
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
