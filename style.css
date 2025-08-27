@@ -3,7 +3,6 @@
    Global Styles
 ========= */
 :root{
-  /* refined palette */
   --bg1:#fff9e6; --bg2:#fff0c7; --bg3:#ffe075;
   --gold:#f4c84f; --gold-mid:#f0bd3a; --gold-dark:#d19a22;
   --ink:#221a05; --muted:#6e5c24; --ring:#e6cf8a;
@@ -126,17 +125,18 @@ h1 .letter:hover{animation:wiggle .6s; filter:drop-shadow(0 4px 16px rgba(210,15
 /* =========
    Chick SVG above Buy button
 ========= */
-.chick-wrap{
-  width:64px; height:64px; margin:6px auto 10px; position:relative;
+.chick-anim{
+  width:64px; height:64px; margin:6px auto 10px;
   filter: drop-shadow(0 6px 14px rgba(209,154,34,.35));
-  animation: bob 2.2s ease-in-out infinite;
+  animation: floaty 3s ease-in-out infinite;
 }
-@keyframes bob{
-  0%,100%{ transform: translateY(0) }
-  50%{ transform: translateY(-6px) }
+.chick-tilt{
+  width:64px; height:64px; display:block; transform-origin:50% 55%;
+  animation: tilt 4s ease-in-out infinite;
 }
-/* speed up a little on hover of the buy card */
-.card.buy:hover .chick-wrap{ animation-duration: 1.8s; }
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes tilt{0%,100%{transform:rotate(0)}25%{transform:rotate(3deg)}75%{transform:rotate(-3deg)}}
+.card.buy:hover .chick-anim{ animation-duration:2.2s }
 
 /* =========
    ACCOUNTS SECTION
@@ -159,7 +159,8 @@ footer{
 }
 @media (max-width:640px){
   .nav-wrap{height:60px}
-  .menu{display:none} /* بسيطة للموبايل: إخفاء القائمة، يمكن لاحقاً إضافة هامبرجر */
+  /* keep menu visible on small screens */
+  .menu{display:flex}
   h1{font-size:clamp(1.8rem,7vw,3rem)}
   .grid{grid-template-columns:1fr}
 }
@@ -168,6 +169,5 @@ footer{
    REDUCED MOTION
 ========= */
 @media (prefers-reduced-motion: reduce){
-  *, *::before, *::after{ animation: none !important; transition: none !important }
+  *, *::before, *::after{ animation:none !important; transition:none !important }
 }
-```0
