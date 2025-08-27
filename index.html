@@ -1,144 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>CIK — Community Chick Meme Coin</title>
-  <meta name="description" content="CIK — the community chick meme coin. Bright vibes, fair fun, community-first. ⚠️ Crypto is risky." />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <!-- NAV -->
-  <nav>
-    <div class="container nav-wrap">
-      <div class="brand"><span class="dot"></span> <b>CIK</b></div>
-      <div class="menu">
-        <a href="#about">About</a>
-        <a href="#buy">Buy</a>
-        <a href="#how">How to Buy</a>
-        <a href="#accounts">Community</a>
-      </div>
-    </div>
-  </nav>
 
-  <!-- HERO -->
-  <header>
-    <div class="container">
-      <span class="badge">🐥 CIK • Official Meme Coin</span>
-      <h1 id="animatedTitle">CIK — The Community Chick Meme Coin</h1>
-      <p class="lead">Bright vibes. Fair fun. Community-first. No hype — just memes and clean delivery.</p>
-      <div class="actions">
-        <a class="btn btn-ghost" href="#accounts">Join the Community</a>
-      </div>
-    </div>
-  </header>
+<!-- Cool Chick — Minimal SVG Icon (scales cleanly) -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="64" height="64" aria-label="CIK Cool Chick">
+  <defs>
+    <!-- subtle gold body gradient -->
+    <radialGradient id="g" cx="40%" cy="35%" r="65%">
+      <stop offset="0%"  stop-color="#FFF3C7"/>
+      <stop offset="65%" stop-color="#F4C84F"/>
+      <stop offset="100%" stop-color="#D19A22"/>
+    </radialGradient>
+  </defs>
 
-  <!-- ABOUT / CARDS -->
-  <main class="container">
-    <section id="about">
-      <div class="grid">
-        <div class="card">
-          <h3>What is CIK?</h3>
-          <p>CIK is a <b>meme coin</b> inspired by the chick — simple, playful, and community-driven. It’s about memes, fun, and vibes.</p>
-        </div>
+  <!-- body -->
+  <ellipse cx="64" cy="78" rx="34" ry="30" fill="url(#g)" stroke="#5E4715" stroke-width="2" />
+  <!-- head -->
+  <circle cx="64" cy="46" r="22" fill="url(#g)" stroke="#5E4715" stroke-width="2" />
 
-        <!-- BUY CARD (single Buy button) -->
-        <div class="card buy" id="buy">
-          <h3>Ready to Buy?</h3>
-          <p>Swap for CIK on PancakeSwap.</p>
-          <p><b>Contract:</b><br>0x182976Fac92c6282C4afA9f63B3FF52F8E54570d</p>
+  <!-- sunglasses -->
+  <g fill="#1E1E1E" stroke="#2C2C2C" stroke-width="2">
+    <rect x="40" y="38" rx="6" ry="6" width="22" height="12"/>
+    <rect x="66" y="38" rx="6" ry="6" width="22" height="12"/>
+    <rect x="62" y="42" width="6" height="4" fill="#2C2C2C" stroke="none"/> <!-- bridge -->
+  </g>
 
-          <!-- Chick mascot above the button (professional SVG + motion) -->
-          <div class="chick-anim" aria-hidden="true">
-            <svg class="chick-tilt" viewBox="0 0 120 120" role="img">
-              <title>Chick Mascot</title>
-              <defs>
-                <radialGradient id="gBody" cx="40%" cy="35%" r="70%">
-                  <stop offset="0%" stop-color="#fff7c9"/>
-                  <stop offset="60%" stop-color="#f4c84f"/>
-                  <stop offset="100%" stop-color="#d19a22"/>
-                </radialGradient>
-              </defs>
-              <!-- body + head -->
-              <circle cx="60" cy="68" r="32" fill="url(#gBody)"/>
-              <circle cx="60" cy="44" r="22" fill="url(#gBody)"/>
-              <!-- eyes -->
-              <circle cx="52" cy="42" r="3.2" fill="#2b2207"/>
-              <circle cx="68" cy="42" r="3.2" fill="#2b2207"/>
-              <!-- beak -->
-              <polygon points="56,50 64,50 60,58" fill="#e68a00"/>
-              <!-- wing -->
-              <ellipse cx="44" cy="70" rx="10" ry="8" fill="#f0bd3a" transform="rotate(-18 44 70)"/>
-              <!-- feet -->
-              <line x1="52" y1="96" x2="48" y2="108" stroke="#b27717" stroke-width="3" stroke-linecap="round"/>
-              <line x1="68" y1="96" x2="72" y2="108" stroke="#b27717" stroke-width="3" stroke-linecap="round"/>
-              <!-- sparkle -->
-              <circle cx="80" cy="28" r="3" fill="#fff6cc"/>
-            </svg>
-          </div>
+  <!-- beak -->
+  <path d="M56 54 L72 54 Q64 62 56 54Z" fill="#E68A00" stroke="#B86D0A" stroke-width="2" stroke-linejoin="round"/>
 
-          <a class="btn btn-primary" href="https://pancakeswap.finance/swap?outputCurrency=0x182976Fac92c6282C4afA9f63B3FF52F8E54570d" target="_blank" rel="noopener">Buy Now</a>
-        </div>
+  <!-- crossed arms (minimal curve) -->
+  <path d="M42 78 C52 74, 76 74, 86 78" fill="none" stroke="#5E4715" stroke-width="3" stroke-linecap="round"/>
+  <path d="M46 84 C56 80, 72 80, 82 84" fill="none" stroke="#5E4715" stroke-width="3" stroke-linecap="round"/>
 
-        <div class="card disclaimer">
-          <h3>Risk Disclaimer</h3>
-          <p>⚠️ Crypto is highly volatile and risky. CIK is an entertainment project (meme coin), not financial advice. Only invest what you can afford to lose.</p>
-        </div>
-      </div>
-    </section>
+  <!-- wing hint -->
+  <path d="M36 80 q6-8 12-10" fill="none" stroke="#5E4715" stroke-width="2" stroke-linecap="round"/>
+  <path d="M92 80 q-6-8 -12-10" fill="none" stroke="#5E4715" stroke-width="2" stroke-linecap="round"/>
 
-    <section id="how">
-      <h2>How to Buy</h2>
-      <div class="grid">
-        <div class="card"><h3>1) Wallet</h3><p>Install a wallet like MetaMask or Phantom.</p></div>
-        <div class="card"><h3>2) Funds</h3><p>Load your wallet with the chain’s native token (e.g. BNB).</p></div>
-        <div class="card"><h3>3) Swap</h3><p>Import the CIK contract on the DEX and confirm the trade.</p></div>
-      </div>
-    </section>
-  </main>
+  <!-- tiny crest -->
+  <path d="M58 28 q6-6 12 0" fill="none" stroke="#5E4715" stroke-width="2" stroke-linecap="round"/>
 
-  <!-- OFFICIAL ACCOUNTS -->
-  <section id="accounts" class="container">
-    <h2>Official Accounts</h2>
-    <div class="grid">
-      <a class="card" href="https://t.me/cik3000" target="_blank" rel="noopener">
-        <h3>Telegram</h3><p>Join our community</p>
-      </a>
-      <a class="card" href="https://x.com/cik_coin" target="_blank" rel="noopener">
-        <h3>Twitter / X</h3><p>Follow updates & memes</p>
-      </a>
-      <a class="card" href="https://bscscan.com/token/0x182976Fac92c6282C4afA9f63B3FF52F8E54570d" target="_blank" rel="noopener">
-        <h3>Contract</h3><p>View on BscScan</p>
-      </a>
-      <a class="card" href="mailto:Info.cik@cikcoin.art">
-        <h3>Email</h3><p>Info.cik@cikcoin.art</p>
-      </a>
-    </div>
-  </section>
+  <!-- feet -->
+  <g stroke="#B27717" stroke-width="3" stroke-linecap="round">
+    <line x1="54" y1="104" x2="54" y2="114"/>
+    <line x1="74" y1="104" x2="74" y2="114"/>
+  </g>
 
-  <footer>
-    © <span id="year"></span> CIK — For entertainment only. Crypto is risky.
-  </footer>
-
-  <!-- Minimal JS: year + animated headline -->
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Interactive headline: split into letters with delay
-    (function(){
-      const title = document.getElementById('animatedTitle');
-      const text = title.textContent.trim();
-      title.textContent = "";
-      [...text].forEach((ch,i)=>{
-        const span = document.createElement('span');
-        span.className = 'letter';
-        span.style.setProperty('--d', `${i*50}ms`);
-        span.textContent = ch;
-        title.appendChild(span);
-      });
-      requestAnimationFrame(()=>title.classList.add('ready'));
-    })();
-  </script>
-</body>
-</html>
+  <!-- soft highlight -->
+  <ellipse cx="54" cy="38" rx="8" ry="5" fill="#FFF6DA" opacity=".65"/>
+</svg>
