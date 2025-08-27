@@ -2,7 +2,7 @@
 const y = document.getElementById('year');
 if (y) y.textContent = new Date().getFullYear();
 
-/* ===== Preloader: 0–60% crack, 100% hatch + feathers ===== */
+/* ===== Preloader: 0–60% crack, 100% hatch ===== */
 (function(){
   const preloader  = document.getElementById("preloader");
   const progressEl = document.getElementById("progress");
@@ -23,19 +23,6 @@ if (y) y.textContent = new Date().getFullYear();
 
     if (p === 100){
       preloader.classList.add('hatch');
-
-      // 🪶 Feathers on hatch (main script)
-      for (let i = 0; i < 12; i++) {
-        const feather = document.createElement('div');
-        feather.className = 'feather';
-        feather.textContent = '🪶';
-        feather.style.left = Math.random() * 100 + 'vw';
-        feather.style.fontSize = (Math.random() * 1 + 0.8) + 'rem';
-        feather.style.animationDuration = (Math.random() * 2 + 3) + 's';
-        document.body.appendChild(feather);
-        feather.addEventListener('animationend', () => feather.remove());
-      }
-
       setTimeout(() => {
         preloader.style.transition = "opacity .6s ease";
         preloader.style.opacity = "0";
@@ -59,8 +46,10 @@ if (y) y.textContent = new Date().getFullYear();
   const text = title.textContent.trim().replace(/\s+/g, ' ');
   title.textContent = '';
 
-  const reduce = window.matchMedia &&
-                 window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // اسمح بالأنيميشن دائمًا إذا data-anim="on" موجودة على <html>
+  const reducePref = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const forceAnim  = !!document.documentElement.dataset.anim;
+  const reduce = reducePref && !forceAnim;
 
   const words = text.split(' ');
   let i = 0;
