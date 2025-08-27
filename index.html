@@ -1,302 +1,160 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>CIK — عملة ميم ممتعة يقودها المجتمع</title>
-  <meta name="description" content="CIK — عملة ميم للمتعة وبناء المجتمع. تحذير: الاستثمار في العملات الرقمية عالي المخاطر." />
-  <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700;800&display=swap" rel="stylesheet">
+  <title>CIK — A Meme Coin for Fun</title>
+  <meta name="description" content="CIK — a meme coin for fun and community vibes. ⚠️ Crypto is risky, you may lose your funds." />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
   <style>
     :root{
-      /* لوحة ألوان مناسبة للكتكوت */
-      --bg1:#fff9e9;   /* كريم فاتح */
-      --bg2:#fff2cd;   /* أصفر باهت */
-      --bg3:#ffe27a;   /* أصفر مشرق */
-      --gold:#f3c94d;  /* ذهبي ناعم */
-      --gold-deep:#d9a82e;
-      --ink:#2a230b;   /* نص داكن دافئ */
-      --muted:#8a7a3c; /* نص ثانوي */
-      --ring:#e7d18a;  /* حدود لطيفة */
-      --shadow: 0 18px 60px rgba(0,0,0,.12);
-      --radius: 18px;
+      --bg1:#fff9e9; --bg2:#fff2cd; --bg3:#ffe27a;
+      --gold:#f3c94d; --gold-dark:#d9a82e;
+      --ink:#2a230b; --muted:#7a6a2c; --ring:#e7d18a;
+      --shadow:0 18px 60px rgba(0,0,0,.12);
+      --radius:18px;
     }
-
     *{box-sizing:border-box}
-    html,body{height:100%}
     body{
-      margin:0;
-      font-family: "Almarai", system-ui, -apple-system, Segoe UI, Roboto, Arial;
-      color:var(--ink);
-      line-height:1.7;
+      margin:0; font-family:"Outfit",sans-serif; line-height:1.6; color:var(--ink);
       background:
         radial-gradient(1200px 700px at 20% -10%, var(--bg2) 0%, transparent 60%),
         radial-gradient(1200px 700px at 120% 0%, var(--bg3) 0%, transparent 55%),
         radial-gradient(circle at 30% 20%, var(--bg1) 0%, var(--bg2) 40%, var(--bg3) 100%);
     }
-
     a{color:inherit; text-decoration:none}
-    .container{max-width:1100px; margin-inline:auto; padding-inline:18px}
+    .container{max-width:1100px; margin:auto; padding:0 18px}
 
-    /* ===== NAV (بسيط) ===== */
-    .nav{
-      position:sticky; top:0; z-index:10;
-      backdrop-filter:saturate(140%) blur(8px);
-      background:linear-gradient(180deg,#fff8e6cc,#fff8e666);
-      border-bottom:1px solid var(--ring);
-    }
-    .nav-wrap{display:flex; align-items:center; justify-content:space-between; height:64px}
-    .brand{display:flex; align-items:center; gap:10px; font-weight:800}
-    .dot{
-      width:12px; height:12px; border-radius:50%;
-      background:radial-gradient(circle at 35% 35%, #fff6cc, var(--gold));
-      box-shadow:0 0 18px #f3c94d88;
-    }
-    .menu{display:flex; gap:14px; align-items:center}
-    .menu a{
-      position:relative; padding:8px 10px; font-weight:700; color:#5a4d19;
-      transition:transform .2s ease, opacity .2s ease;
-      opacity:.9
-    }
-    .menu a:hover{opacity:1; transform:translateY(-2px)}
-    .menu a::after{
-      content:""; position:absolute; right:10px; left:10px; bottom:5px; height:3px; border-radius:3px;
-      background:linear-gradient(90deg,#ffe27a,#d9a82e); transform:scaleX(.15); transform-origin:right;
-      transition:transform .25s ease;
-      box-shadow:0 4px 14px rgba(243,201,77,.35);
-    }
+    /* NAV */
+    nav{position:sticky;top:0;backdrop-filter:blur(8px);background:#fff9e9aa;border-bottom:1px solid var(--ring)}
+    .nav-wrap{display:flex;justify-content:space-between;align-items:center;height:64px}
+    .brand{font-weight:900;display:flex;align-items:center;gap:8px}
+    .dot{width:14px;height:14px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#fff6cc,var(--gold));box-shadow:0 0 12px #f3c94d88}
+    .menu{display:flex;gap:16px}
+    .menu a{font-weight:700;position:relative;opacity:.9;transition:.2s}
+    .menu a:hover{opacity:1;transform:translateY(-2px)}
+    .menu a::after{content:"";position:absolute;left:6px;right:6px;bottom:4px;height:3px;border-radius:3px;background:linear-gradient(90deg,var(--gold),var(--gold-dark));transform:scaleX(.15);transform-origin:left;transition:.25s}
     .menu a:hover::after{transform:scaleX(1)}
 
-    /* ===== HERO ===== */
-    .hero{padding:64px 0 26px}
-    .badge{
-      display:inline-flex; align-items:center; gap:8px;
-      padding:8px 12px; border:1px solid var(--ring); border-radius:999px;
-      background:#fff8e6aa; color:#6c5a21; font-weight:700;
-      box-shadow: inset 0 1px 0 #ffffffaa;
-    }
-    .title{
-      margin:14px 0 8px 0;
-      font-size:clamp(2rem, 6vw, 3.2rem);
-      font-weight:800;
-      letter-spacing:.3px;
-    }
-    .title .letter{
-      display:inline-block;
-      transform-origin: 50% 70%;
-      animation: floatIn .8s ease both;
-      will-change: transform, color, text-shadow;
-    }
-    .title .letter:hover{
-      animation: wiggle .6s ease;
-      color:#b38712;
-      text-shadow:0 4px 18px rgba(217,168,46,.35);
-    }
-    /* موجة دخول متتابعة */
-    .title .letter{
-      opacity:0; transform:translateY(16px) rotate(-2deg);
-    }
-    .title.ready .letter{ opacity:1 }
-    @keyframes floatIn{
-      from{ opacity:0; transform:translateY(18px) rotate(-5deg) scale(.96) }
-      to  { opacity:1; transform:translateY(0) rotate(0) scale(1) }
-    }
-    @keyframes wiggle{
-      0%{ transform:translateY(0) rotate(0) }
-      40%{ transform:translateY(-6px) rotate(2deg) }
-      100%{ transform:translateY(0) rotate(0) }
-    }
+    /* HERO */
+    header{padding:60px 0 30px}
+    .badge{display:inline-block;padding:8px 12px;border:1px solid var(--ring);border-radius:999px;background:#fffdf6aa;color:var(--muted);font-weight:600}
+    h1{margin:16px 0;font-size:clamp(2rem,6vw,3.2rem);font-weight:900}
+    h1 .letter{display:inline-block;opacity:0;transform:translateY(16px) rotate(-2deg);animation:floatIn .8s forwards;animation-delay:var(--d)}
+    h1.ready .letter{opacity:1}
+    h1 .letter:hover{animation:wiggle .6s; color:#b38712;text-shadow:0 4px 16px rgba(217,168,46,.4)}
+    @keyframes floatIn{from{opacity:0;transform:translateY(18px) rotate(-5deg) scale(.96)}to{opacity:1;transform:none}}
+    @keyframes wiggle{0%{transform:none}40%{transform:translateY(-6px) rotate(2deg)}100%{transform:none}}
+    .lead{color:var(--muted);font-weight:600;margin:0 0 18px}
+    .actions{display:flex;gap:12px;flex-wrap:wrap}
+    .btn{padding:12px 18px;border-radius:14px;font-weight:800;transition:.2s;box-shadow:var(--shadow),inset 0 1px 0 #fff6}
+    .btn-primary{background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:#2d2408}
+    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 18px 42px rgba(217,168,46,.32),inset 0 1px 0 #fff6}
+    .btn-ghost{border:1px solid var(--ring);background:#fffaf0aa;color:var(--muted)}
+    .btn-ghost:hover{transform:translateY(-2px);box-shadow:0 16px 36px rgba(0,0,0,.12)}
 
-    .lead{color:#6e5d28; font-weight:700; margin:8px 0 18px 0}
-    .actions{display:flex; gap:10px; flex-wrap:wrap}
-    .btn{
-      display:inline-block; padding:12px 18px; border-radius:14px; font-weight:800;
-      box-shadow: var(--shadow), inset 0 1px 0 #ffffffaa; transition:transform .15s ease, box-shadow .25s ease;
-    }
-    .btn-primary{
-      background:linear-gradient(135deg,#ffe27a,#d9a82e); color:#2d2408;
-    }
-    .btn-primary:hover{ transform:translateY(-2px); box-shadow:0 18px 42px rgba(217,168,46,.32), inset 0 1px 0 #fff6 }
-    .btn-ghost{
-      border:1px solid var(--ring); background:#fffaf0aa; color:#6c5a21;
-    }
-    .btn-ghost:hover{ transform:translateY(-2px); box-shadow:0 16px 36px rgba(0,0,0,.12) }
+    /* CARDS */
+    .grid{display:grid;gap:16px;margin:24px 0;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+    .card{background:#fffefb;border:1px solid var(--ring);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
+    .card h3{margin:6px 0 10px}
+    .card p{margin:0 0 12px;color:#4d3f18}
+    .card.buy .btn-primary{width:100%;display:block;text-align:center}
+    .card.disclaimer{background:#fff1ea;border-color:#f2c3b0}
+    .card.disclaimer h3{color:#8b2f1f}
+    .card.disclaimer p{color:#6b3a2a}
 
-    /* ===== CARDS ===== */
-    .grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-block:26px}
-    .card{
-      background:linear-gradient(180deg,#fff8e6,#fff4d4);
-      border:1px solid var(--ring);
-      border-radius:var(--radius);
-      padding:18px;
-      box-shadow:var(--shadow), inset 0 1px 0 #ffffffaa;
-      transition: transform .2s ease, box-shadow .25s ease;
-    }
-    .card:hover{ transform:translateY(-3px); box-shadow:0 20px 50px rgba(0,0,0,.14) }
-    .card h3{ margin:4px 0 8px 0 }
-    .card p{ margin:0 0 10px 0; color:#5e4f1b }
-
-    .card.buy .btn-primary{ width:100%; text-align:center; }
-    .card.disclaimer{
-      background:linear-gradient(180deg,#fff1ea,#ffe6d9);
-      border-color:#f2c3b0;
-    }
-    .card.disclaimer h3{ color:#8b2f1f }
-    .card.disclaimer p{ color:#6b3a2a }
-
-    /* ===== SECTION HEADERS ===== */
-    .section{padding:28px 0}
-    .section h2{
-      font-size:1.7rem; margin:0 0 12px 0; position:relative;
-    }
-    .section h2::after{
-      content:""; position:absolute; right:0; bottom:-8px; width:80px; height:4px; border-radius:3px;
-      background:linear-gradient(90deg,#ffe27a,#d9a82e);
-      box-shadow:0 6px 20px rgba(217,168,46,.35);
-    }
-
-    /* ===== FOOTER ===== */
-    footer{
-      margin-top:22px; padding:18px 0;
-      border-top:1px solid var(--ring);
-      background:#fff8e7aa;
-      color:#6e5d28;
-      text-align:center;
-    }
-
-    /* RESPONSIVE */
-    @media (max-width:900px){ .grid{ grid-template-columns:1fr 1fr } }
-    @media (max-width:640px){
-      .grid{ grid-template-columns:1fr }
-      .menu{ display:none }
-    }
-
-    /* Reduced motion */
-    @media (prefers-reduced-motion: reduce){
-      .title .letter, .menu a, .btn, .card{ transition:none !important; animation:none !important }
-    }
+    /* FOOTER */
+    footer{margin-top:30px;padding:18px 0;text-align:center;font-size:.9rem;color:var(--muted);border-top:1px solid var(--ring)}
   </style>
 </head>
 <body>
   <!-- NAV -->
-  <nav class="nav">
+  <nav>
     <div class="container nav-wrap">
-      <div class="brand"><span class="dot"></span><b>CIK</b></div>
+      <div class="brand"><span class="dot"></span> <b>CIK</b></div>
       <div class="menu">
-        <a href="#about">عن العملة</a>
-        <a href="#buy">شراء</a>
-        <a href="#how">كيف تشتري</a>
-        <a href="#community">المجتمع</a>
+        <a href="#about">About</a>
+        <a href="#buy">Buy</a>
+        <a href="#how">How to Buy</a>
+        <a href="#community">Community</a>
       </div>
     </div>
   </nav>
 
   <!-- HERO -->
-  <header class="hero">
+  <header>
     <div class="container">
       <span class="badge">🐥 CIK • Meme Coin</span>
-      <h1 id="animatedTitle" class="title">عملة ميم ممتعة يقودها المجتمع</h1>
-      <p class="lead">CIK هي عملة ميم للمتعة وبناء مجتمع نشِط. لا وعود مبالغ فيها — شفافية، تصميم نظيف، ومحتوى ممتع.</p>
+      <h1 id="animatedTitle">A Meme Coin for Fun and Community</h1>
+      <p class="lead">CIK is a meme coin built for fun, memes, and community vibes. No fake promises — just transparency and playful energy.</p>
       <div class="actions">
-        <a class="btn btn-primary" href="#" target="_blank" rel="noopener">شراء من DEX</a>
-        <a class="btn btn-ghost" href="#community">انضم إلى التيليجرام</a>
+        <a class="btn btn-primary" href="#" target="_blank">Buy on DEX</a>
+        <a class="btn btn-ghost" href="#community">Join Telegram</a>
       </div>
     </div>
   </header>
 
-  <!-- CARDS -->
+  <!-- ABOUT / CARDS -->
   <main class="container">
-    <section id="about" class="section">
-      <h2>عن العملة</h2>
+    <section id="about">
       <div class="grid">
-        <article class="card">
-          <h3>ما هي CIK؟</h3>
-          <p>CIK هي <b>عملة ميم</b> مستوحاة من الكتكوت — هوية مرِحة وبسيطة تقودها روح المجتمع.</p>
-          <p>الهدف: المتعة، التفاعل، وانتشار الميمات بدون وعود زائفة.</p>
-        </article>
-
-        <article class="card buy" id="buy">
-          <h3>جاهز للشراء؟</h3>
-          <p>يمكنك شراء CIK عبر أي DEX داعم. استبدل الرمز بالعقد الرسمي عند توفره.</p>
-          <a class="btn btn-primary" href="#" target="_blank" rel="noopener">شراء الآن</a>
-        </article>
-
-        <article class="card disclaimer">
-          <h3>تحذير المخاطر</h3>
-          <p>⚠️ العملات الرقمية عالية التقلب وقد تؤدي إلى خسارة رأس المال. CIK مشروع ترفيهي (Meme Coin) وليست نصيحة استثمارية. استثمر فقط ما يمكنك تحمّل خسارته.</p>
-        </article>
+        <div class="card">
+          <h3>What is CIK?</h3>
+          <p>CIK is a <b>meme coin</b> inspired by the chick — simple, playful, and community-driven. It’s about memes, fun, and vibes.</p>
+        </div>
+        <div class="card buy" id="buy">
+          <h3>Ready to Buy?</h3>
+          <p>Swap for CIK on supported DEX platforms. Import the official contract once published.</p>
+          <a class="btn btn-primary" href="#" target="_blank">Buy Now</a>
+        </div>
+        <div class="card disclaimer">
+          <h3>Risk Disclaimer</h3>
+          <p>⚠️ Crypto is highly volatile and risky. CIK is an entertainment project (meme coin), not financial advice. Only invest what you can afford to lose.</p>
+        </div>
       </div>
     </section>
 
-    <section id="how" class="section">
-      <h2>كيف تشتري</h2>
+    <section id="how">
+      <h2>How to Buy</h2>
       <div class="grid">
-        <article class="card">
-          <h3>1) أنشئ محفظة</h3>
-          <p>نزّل محفظة مثل <b>MetaMask</b> أو <b>Phantom</b> حسب الشبكة التي ستعتمدها.</p>
-        </article>
-        <article class="card">
-          <h3>2) أضف رصيدًا</h3>
-          <p>أرسل العملة الأصلية للشبكة إلى محفظتك (مثل BNB أو SOL…).</p>
-        </article>
-        <article class="card">
-          <h3>3) اشتر من DEX</h3>
-          <p>افتح رابط الشراء، أضف عقد CIK عند توفره، أكّد المبادلة واستمتع.</p>
-        </article>
+        <div class="card"><h3>1) Wallet</h3><p>Install a wallet like MetaMask or Phantom.</p></div>
+        <div class="card"><h3>2) Funds</h3><p>Load your wallet with the chain’s native token (e.g. BNB, SOL).</p></div>
+        <div class="card"><h3>3) Swap</h3><p>Open the DEX, import the CIK contract, confirm the swap.</p></div>
       </div>
     </section>
 
-    <section id="community" class="section">
-      <h2>المجتمع</h2>
+    <section id="community">
+      <h2>Community</h2>
       <div class="grid">
-        <a class="card" href="#" target="_blank" rel="noopener">
-          <h3>قناة التيليجرام</h3>
-          <p>انضم للنقاشات، الإعلانات، والهدايا.</p>
-        </a>
-        <a class="card" href="#" target="_blank" rel="noopener">
-          <h3>حساب X (تويتر)</h3>
-          <p>تابع الميمات والتحديثات أولًا بأول.</p>
-        </a>
-        <a class="card" href="#" target="_blank" rel="noopener">
-          <h3>العقد الرسمي</h3>
-          <p>أضف عنوان العقد ووصلة المستكشف عند توفرهما.</p>
-        </a>
+        <a class="card" href="#" target="_blank"><h3>Telegram</h3><p>Join chats, announcements & giveaways.</p></a>
+        <a class="card" href="#" target="_blank"><h3>Twitter / X</h3><p>Memes, threads, and updates.</p></a>
+        <a class="card" href="#" target="_blank"><h3>Contract</h3><p>View official contract and explorer.</p></a>
       </div>
     </section>
   </main>
 
   <footer>
-    © <span id="year"></span> CIK — للمتعة فقط. المخاطر عالية؛ قد تخسر أموالك.
+    © <span id="year"></span> CIK — For entertainment only. Crypto is risky.
   </footer>
 
   <script>
-    // سنة تلقائية
+    // Year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // عنوان تفاعلي: تقسيم الأحرف وتحريكها بموجة وتأخير متدرّج
+    // Title animation: split into letters
     (function(){
       const title = document.getElementById('animatedTitle');
       const text = title.textContent.trim();
       title.textContent = "";
-      [...text].forEach((ch, i) => {
-        const span = document.createElement('span');
-        span.className = 'letter';
-        span.style.animationDelay = (i * 45) + 'ms';
-        span.textContent = ch;
+      [...text].forEach((ch,i)=>{
+        const span=document.createElement('span');
+        span.className='letter';
+        span.style.setProperty('--d', (i*50)+'ms');
+        span.textContent=ch;
         title.appendChild(span);
       });
-      // بعد التوليد نضيف كلاس ready لتفعيل الـopacity
-      requestAnimationFrame(()=> title.classList.add('ready'));
+      requestAnimationFrame(()=>title.classList.add('ready'));
     })();
-
-    // احترام تقليل الحركة
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if(reduce){
-      document.querySelectorAll('.letter').forEach(el=>{
-        el.style.animation = 'none';
-        el.style.opacity = 1;
-        el.style.transform = 'none';
-      });
-    }
   </script>
 </body>
 </html>
