@@ -48,8 +48,6 @@
     .lead{color:var(--muted);font-weight:600;margin:0 0 18px}
     .actions{display:flex;gap:12px;flex-wrap:wrap}
     .btn{padding:12px 18px;border-radius:14px;font-weight:800;transition:.2s;box-shadow:var(--shadow),inset 0 1px 0 #fff6}
-    .btn-primary{background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:#2d2408}
-    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 18px 42px rgba(217,168,46,.32),inset 0 1px 0 #fff6}
     .btn-ghost{border:1px solid var(--ring);background:#fffaf0aa;color:var(--muted)}
     .btn-ghost:hover{transform:translateY(-2px);box-shadow:0 16px 36px rgba(0,0,0,.12)}
 
@@ -57,8 +55,10 @@
     .grid{display:grid;gap:16px;margin:24px 0;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
     .card{background:#fffefb;border:1px solid var(--ring);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
     .card h3{margin:6px 0 10px}
-    .card p{margin:0 0 12px;color:#4d3f18}
+    .card p{margin:0 0 12px;color:#4d3f18;overflow-wrap:break-word;word-break:break-word}
     .card.buy .btn-primary{width:100%;display:block;text-align:center}
+    .btn-primary{background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:#2d2408}
+    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 18px 42px rgba(217,168,46,.32),inset 0 1px 0 #fff6}
     .card.disclaimer{background:#fff1ea;border-color:#f2c3b0}
     .card.disclaimer h3{color:#8b2f1f}
     .card.disclaimer p{color:#6b3a2a}
@@ -76,20 +76,19 @@
         <a href="#about">About</a>
         <a href="#buy">Buy</a>
         <a href="#how">How to Buy</a>
-        <a href="#community">Community</a>
+        <a href="#accounts">Community</a>
       </div>
     </div>
   </nav>
 
-  <!-- HERO -->
+  <!-- HERO (no Buy button here) -->
   <header>
     <div class="container">
       <span class="badge">🐥 CIK • Meme Coin</span>
       <h1 id="animatedTitle">A Meme Coin for Fun and Community</h1>
       <p class="lead">CIK is a meme coin built for fun, memes, and community vibes. No fake promises — just transparency and playful energy.</p>
       <div class="actions">
-        <a class="btn btn-primary" href="https://pancakeswap.finance/swap?outputCurrency=0x182976Fac92c6282C4afA9f63B3FF52F8E54570d" target="_blank">Buy on DEX</a>
-        <a class="btn btn-ghost" href="https://t.me/cik3000" target="_blank">Join Telegram</a>
+        <a class="btn btn-ghost" href="#accounts">Join the Community</a>
       </div>
     </div>
   </header>
@@ -102,12 +101,15 @@
           <h3>What is CIK?</h3>
           <p>CIK is a <b>meme coin</b> inspired by the chick — simple, playful, and community-driven. It’s about memes, fun, and vibes.</p>
         </div>
+
+        <!-- ONLY BUY BUTTON HERE -->
         <div class="card buy" id="buy">
           <h3>Ready to Buy?</h3>
-          <p>Swap for CIK on PancakeSwap</p>
+          <p>Swap for CIK on PancakeSwap.</p>
           <p><b>Contract:</b><br>0x182976Fac92c6282C4afA9f63B3FF52F8E54570d</p>
-          <a class="btn btn-primary" href="https://pancakeswap.finance/swap?outputCurrency=0x182976Fac92c6282C4afA9f63B3FF52F8E54570d" target="_blank">Buy Now</a>
+          <a class="btn btn-primary" href="https://pancakeswap.finance/swap?outputCurrency=0x182976Fac92c6282C4afA9f63B3FF52F8E54570d" target="_blank" rel="noopener">Buy Now</a>
         </div>
+
         <div class="card disclaimer">
           <h3>Risk Disclaimer</h3>
           <p>⚠️ Crypto is highly volatile and risky. CIK is an entertainment project (meme coin), not financial advice. Only invest what you can afford to lose.</p>
@@ -123,32 +125,42 @@
         <div class="card"><h3>3) Swap</h3><p>Import the CIK contract on the DEX and confirm the trade.</p></div>
       </div>
     </section>
-
-    <section id="community">
-      <h2>Community</h2>
-      <div class="grid">
-        <a class="card" href="https://t.me/cik3000" target="_blank"><h3>Telegram</h3><p>Join chats, announcements & giveaways.</p></a>
-        <a class="card" href="https://x.com/cik_coin" target="_blank"><h3>Twitter / X</h3><p>Memes, threads, and updates.</p></a>
-        <a class="card" href="https://bscscan.com/token/0x182976Fac92c6282C4afA9f63B3FF52F8E54570d" target="_blank"><h3>Contract</h3><p>View contract on BscScan.</p></a>
-      </div>
-    </section>
   </main>
+
+  <!-- OFFICIAL ACCOUNTS AT THE END -->
+  <section id="accounts" class="container" style="padding:30px 0">
+    <h2>Official Accounts</h2>
+    <div class="grid">
+      <a class="card" href="https://t.me/cik3000" target="_blank" rel="noopener">
+        <h3>Telegram</h3><p>Join our community</p>
+      </a>
+      <a class="card" href="https://x.com/cik_coin" target="_blank" rel="noopener">
+        <h3>Twitter / X</h3><p>Follow updates & memes</p>
+      </a>
+      <a class="card" href="https://bscscan.com/token/0x182976Fac92c6282C4afA9f63B3FF52F8E54570d" target="_blank" rel="noopener">
+        <h3>Contract</h3><p>View on BscScan</p>
+      </a>
+    </div>
+  </section>
 
   <footer>
     © <span id="year"></span> CIK — For entertainment only. Crypto is risky.
   </footer>
 
   <script>
+    // Year
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Interactive title (one title only)
     (function(){
       const title = document.getElementById('animatedTitle');
       const text = title.textContent.trim();
       title.textContent = "";
       [...text].forEach((ch,i)=>{
-        const span = document.createElement('span');
-        span.className = 'letter';
-        span.style.setProperty('--d', `${i * 50}ms`);
-        span.textContent = ch;
+        const span=document.createElement('span');
+        span.className='letter';
+        span.style.setProperty('--d', (i*50)+'ms');
+        span.textContent=ch;
         title.appendChild(span);
       });
       requestAnimationFrame(()=>title.classList.add('ready'));
