@@ -1,20 +1,50 @@
 // Footer year
-document.getElementById('year').textContent = new Date().getFullYear();
+const y = document.getElementById('year');
+if (y) y.textContent = new Date().getFullYear();
 
-// Animated headline: split letters + delays
-(function(){
+// Animated headline: split into WORDS then LETTERS (prevents mid-word wrap)
+(function () {
   const title = document.getElementById('animatedTitle');
   if (!title) return;
-  const text = title.textContent.trim();
-  title.textContent = "";
-  [...text].forEach((ch,i)=>{
-    const span = document.createElement('span');
-    span.className = 'letter';
-    span.style.setProperty('--d', `${i*50}ms`);
-    span.textContent = ch;
-    title.appendChild(span);
+
+  const text = title.textContent.trim().replace(/\s+/g, ' ');
+  title.textContent = '';
+
+  const reduce = window.matchMedia &&
+                 window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const words = text.split(' ');
+  let i = 0; // letter index for staggered delay
+
+  words.forEach((w, wi) => {
+    const wSpan = document.createElement('span');
+    wSpan.className = 'word';
+
+    [...w].forEach((ch) => {
+      const l = document.createElement('span');
+      l.className = 'letter';
+      l.style.setProperty('--d', `${i * 50}ms`);
+      l.textContent = ch;
+      wSpan.appendChild(l);
+      i++;
+    });
+
+    title.appendChild(wSpan);
+    if (wi !== words.length - 1) {
+      title.appendChild(document.createTextNode(' '));
+      i++; // tiny gap delay between words
+    }
   });
-  requestAnimationFrame(()=>title.classList.add('ready'));
+
+  if (reduce) {
+    title.querySelectorAll('.letter').forEach((el) => {
+      el.style.animation = 'none';
+      el.style.opacity = 1;
+      el.style.transform = 'none';
+    });
+  } else {
+    requestAnimationFrame(() => title.classList.add('ready'));
+  }
 })();
 
 // Cards: Tilt 3D + Ripple
