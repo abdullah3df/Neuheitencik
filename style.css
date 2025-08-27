@@ -7,13 +7,18 @@
   --surface:#FFFFFF;
   --radius:22px; --shadow:0 14px 40px rgba(174,129,22,.18);
   --font:"Nunito", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  --headline-from:#FFDA5C; --headline-to:#FFA62E;
+
+  /* headline gradient: grassy → gold */
+  --headline-from:#8FD66A;   /* light grass */
+  --headline-mid:#2FAE49;    /* deeper grass */
+  --headline-gold:#FFC83D;   /* gold */
 }
 
+/* Base */
 *{box-sizing:border-box}
 body{
   margin:0; font-family:var(--font);
-  color:var(--ink); line-height:1.7;
+  color:#2F2410; line-height:1.7;
   background:
     radial-gradient(900px 560px at 15% -10%, var(--bg2) 0%, transparent 60%),
     radial-gradient(1200px 700px at 110% 0%, var(--bg3) 0%, transparent 55%),
@@ -22,7 +27,7 @@ body{
 a{color:inherit; text-decoration:none}
 .container{max-width:1100px;margin:auto;padding:0 18px}
 
-/* === PRELOADER cosmetics (basics are inline in <head>) === */
+/* PRELOADER cosmetics (basics inline already) */
 #preloader{backdrop-filter:blur(4px)}
 .egg{width:140px;height:190px;position:relative;display:inline-block}
 .egg-svg{display:block;margin:0 auto;filter:drop-shadow(0 10px 24px rgba(174,129,22,.15))}
@@ -37,29 +42,13 @@ a{color:inherit; text-decoration:none}
 @keyframes halfLeft{to{transform:translate(-28px,-12px) rotate(-24deg)}}
 @keyframes halfRight{to{transform:translate(28px,-12px) rotate(24deg)}}
 #preloader.hatch #chick{animation:chickPop .8s .2s ease-out forwards}
-@keyframes chickPop{0%{transform:translate(-50%,-30%) scale(.2);opacity:0}
+@keyframes chickPop{
+  0%{transform:translate(-50%,-30%) scale(.2);opacity:0}
   60%{transform:translate(-50%,-58%) scale(1.15);opacity:1}
-  100%{transform:translate(-50%,-58%) scale(1)}}
-
-/* 🪶 Falling feathers */
-.feather{
-  position:fixed;
-  top:-20px;
-  font-size:1.2rem;
-  opacity:.9;
-  animation:fall linear forwards;
-  pointer-events:none;
-  z-index:1500;
-}
-@keyframes fall{
-  0%{ transform: translateY(0) translateX(0) rotate(0deg); opacity:1 }
-  25%{ transform: translateY(25vh) translateX(-10px) rotate(20deg) }
-  50%{ transform: translateY(50vh) translateX(10px) rotate(40deg); opacity:.85 }
-  75%{ transform: translateY(75vh) translateX(-6px) rotate(55deg) }
-  100%{ transform: translateY(100vh) translateX(6px) rotate(70deg); opacity:0 }
+  100%{transform:translate(-50%,-58%) scale(1)}
 }
 
-/* ===== NAV ===== */
+/* NAV */
 nav.nav{
   position:sticky; top:0; z-index:1000;
   backdrop-filter:blur(8px) saturate(140%);
@@ -102,7 +91,7 @@ nav.nav{
   .nav.open .menu{ transform: translateY(0); opacity:1; pointer-events:auto; }
 }
 
-/* ===== HERO ===== */
+/* HERO */
 header{padding:64px 0 30px}
 .hero{position:relative}
 .hero::after{
@@ -114,6 +103,8 @@ header{padding:64px 0 30px}
   display:inline-block; padding:8px 14px; border:1px dashed var(--ring);
   border-radius:999px; background:#fffdf7; color:#7a5b1d; font-weight:800
 }
+
+/* Headline (animated grassy → gold) */
 h1{
   margin:16px 0 6px; font-size:clamp(2.1rem,6vw,3.2rem); font-weight:900; letter-spacing:.2px;
 }
@@ -121,12 +112,21 @@ h1 .word{ display:inline-block; white-space:nowrap; }
 h1 .letter{
   display:inline-block; opacity:0; transform:translateY(16px) rotate(-2deg);
   animation:floatIn .8s forwards; animation-delay:var(--d);
-  background:linear-gradient(90deg,var(--headline-from),var(--headline-to));
-  -webkit-background-clip:text; background-clip:text; color:transparent;
 }
-h1.ready .letter{opacity:1}
+h1.grass .letter{
+  background-image:
+    linear-gradient(90deg, var(--headline-from) 0%, var(--headline-mid) 45%, var(--headline-gold) 100%),
+    radial-gradient(2px 2px at 20% 30%, #ffffff22 0 40%, transparent 41%),
+    repeating-linear-gradient(45deg, #ffffff12 0 2px, transparent 2px 6px);
+  background-size: 140% 100%, 200px 200px, 300px 300px;
+  background-position: 0 0, 0 0, 0 0;
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  animation: floatIn .8s forwards, grassShift 6s linear infinite;
+}
 @keyframes floatIn{from{opacity:0;transform:translateY(18px) rotate(-5deg) scale(.96)}to{opacity:1;transform:none}}
-.lead{color:var(--muted);font-weight:700;margin:6px 0 18px}
+@keyframes grassShift{to{ background-position: 140% 0, 200px 0, 300px 0; }}
+
+.lead{color:#6b5730;font-weight:700;margin:6px 0 18px}
 .actions{display:flex;gap:12px;flex-wrap:wrap}
 
 /* Buttons */
@@ -136,7 +136,7 @@ h1.ready .letter{opacity:1}
 .btn-ghost{border:2px dashed var(--ring); background:#fff; color:#7a5b1d}
 .btn-big{display:block; text-align:center; padding:14px 20px; font-size:1.05rem}
 
-/* ===== GRID & CARDS ===== */
+/* GRID & CARDS */
 .grid{display:grid;gap:16px;margin:24px 0;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
 .card{
   position:relative; background:var(--surface); border:2px solid #f6e5b5;
@@ -146,8 +146,6 @@ h1.ready .letter{opacity:1}
 }
 .card h3{margin:6px 0 10px}
 .card p{margin:0 0 12px;color:#5a4925;overflow-wrap:break-word;word-break:break-word}
-
-/* Interactive */
 .card.interactive:hover,
 .card.interactive:focus-within{
   transform: translateY(-6px) rotateX(0.8deg);
@@ -165,7 +163,6 @@ h1.ready .letter{opacity:1}
 .card.disclaimer{background:#fff5ee;border-color:#ffc9a2}
 .card.disclaimer h3{color:#8b3a16}
 .card.disclaimer p{color:#7a4b2d}
-
 .buy .contract code{
   background:#fff6d6; padding:6px 8px; border-radius:10px; border:1px dashed #f1d27a;
 }
@@ -184,8 +181,7 @@ footer{margin-top:30px;padding:18px 0;text-align:center;font-size:.95rem;color:#
   .grid{grid-template-columns:1fr}
 }
 
-/* Reduced motion */
+/* Reduced motion — نسمح بالأنيميشن للعناوين لو data-anim=on */
 @media (prefers-reduced-motion: reduce){
-  *,*::before,*::after{animation:none !important;transition:none !important}
-  h1 .letter{opacity:1;transform:none}
+  html:not([data-anim="on"]) h1 .letter{animation:none;opacity:1;transform:none}
 }
