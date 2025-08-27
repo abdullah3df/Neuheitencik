@@ -1,3 +1,4 @@
+
 :root{
   --radius:18px; --shadow:0 18px 60px rgba(0,0,0,.12);
   --bg1:#0f0e0b; --bg2:#17140f; --bg3:#1e1a12;
@@ -42,6 +43,7 @@ nav{
   transform:translateY(-2px);
   color:var(--gold);
 }
+/* لا ::after — لا خطوط تحت الروابط */
 
 /* HERO */
 header{padding:62px 0 30px}
@@ -66,9 +68,60 @@ h1 .letter:hover{animation:wiggle .6s; filter:drop-shadow(0 4px 16px color-mix(i
 
 /* GRID & CARDS */
 .grid{display:grid;gap:16px;margin:24px 0;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
-.card{background:color-mix(in oklab, var(--bg1), #fff 14%);border:1px solid var(--ring);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
+.card{
+  position:relative;
+  background:color-mix(in oklab, var(--bg1), #fff 12%);
+  border:1px solid var(--ring);
+  border-radius:var(--radius);
+  padding:18px;
+  box-shadow:var(--shadow);
+  overflow:hidden;
+  transform-style:preserve-3d;
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  will-change:transform, box-shadow;
+}
 .card h3{margin:6px 0 10px}
 .card p{margin:0 0 12px;color:color-mix(in oklab, var(--ink), #000 10%);overflow-wrap:break-word;word-break:break-word}
+
+/* Interactive effects */
+.card.interactive:hover,
+.card.interactive:focus-within{
+  transform: translateY(-6px);
+  box-shadow: 0 24px 60px rgba(0,0,0,.25), inset 0 1px 0 #fff2;
+  border-color: color-mix(in oklab, var(--gold), #000 10%);
+}
+.card.interactive:hover h3{ color: var(--gold) }
+
+/* edge glow */
+.card.interactive::before{
+  content:""; position:absolute; inset:-1px; border-radius:var(--radius);
+  background: radial-gradient(60% 60% at 50% 0%,
+              color-mix(in oklab, var(--gold), transparent 60%),
+              transparent 70%);
+  filter: blur(14px); opacity: 0; transition:.25s; pointer-events:none;
+}
+.card.interactive:hover::before,
+.card.interactive:focus-within::before{ opacity:.9 }
+
+/* shine sweep */
+.card.interactive::after{
+  content:""; position:absolute; top:0; bottom:0; width:120px;
+  background: linear-gradient(90deg, transparent 0%, #ffffff22 40%, #ffffff55 50%, #ffffff22 60%, transparent 100%);
+  transform: translateX(-160%) skewX(-20deg);
+  transition: transform .6s ease; pointer-events:none;
+}
+.card.interactive:hover::after{ transform: translateX(180%) skewX(-20deg) }
+
+/* Ripple bubble (added via JS) */
+.card-ripple{
+  position:absolute; border-radius:50%; pointer-events:none;
+  transform: translate(-50%, -50%) scale(0);
+  background: radial-gradient(circle, #ffffff88 0%, #ffffff22 60%, transparent 70%);
+  animation: cardRipple .7s ease-out forwards;
+}
+@keyframes cardRipple{
+  to{ transform: translate(-50%, -50%) scale(8); opacity:0; }
+}
 
 /* BUY Button */
 .btn-primary{
@@ -95,21 +148,19 @@ h1 .letter:hover{animation:wiggle .6s; filter:drop-shadow(0 4px 16px color-mix(i
 .card.disclaimer h3{color:#8b2f1f}
 .card.disclaimer p{color:#6b3a2a}
 
-/* ACCOUNTS */
+/* ACCOUNTS + FOOTER */
 #accounts{padding:30px 0}
-
-/* FOOTER */
 footer{margin-top:30px;padding:18px 0;text-align:center;font-size:.9rem;color:var(--muted);border-top:1px solid var(--ring)}
 
-/* RESPONSIVE */
+/* Responsive */
 @media (max-width:640px){
   .menu{display:flex}
   h1{font-size:clamp(1.8rem,7vw,3rem)}
   .grid{grid-template-columns:1fr}
 }
 
-/* REDUCED MOTION */
+/* Reduced motion */
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{animation:none !important;transition:none !important}
   h1 .letter{opacity:1;transform:none}
-                }
+}
