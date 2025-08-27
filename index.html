@@ -88,8 +88,8 @@
       <h1 id="animatedTitle">A Meme Coin for Fun and Community</h1>
       <p class="lead">CIK is a meme coin built for fun, memes, and community vibes. No fake promises — just transparency and playful energy.</p>
       <div class="actions">
-        <a class="btn btn-primary" href="#" target="_blank">Buy on DEX</a>
-        <a class="btn btn-ghost" href="#community">Join Telegram</a>
+        <a class="btn btn-primary" href="https://pancakeswap.finance/swap?outputCurrency=0x182976Fac92c6282C4afA9f63B3FF52F8E54570d" target="_blank">Buy on DEX</a>
+        <a class="btn btn-ghost" href="https://t.me/cik3000" target="_blank">Join Telegram</a>
       </div>
     </div>
   </header>
@@ -104,8 +104,9 @@
         </div>
         <div class="card buy" id="buy">
           <h3>Ready to Buy?</h3>
-          <p>Swap for CIK on supported DEX platforms. Import the official contract once published.</p>
-          <a class="btn btn-primary" href="#" target="_blank">Buy Now</a>
+          <p>Swap for CIK on PancakeSwap</p>
+          <p><b>Contract:</b><br>0x182976Fac92c6282C4afA9f63B3FF52F8E54570d</p>
+          <a class="btn btn-primary" href="https://pancakeswap.finance/swap?outputCurrency=0x182976Fac92c6282C4afA9f63B3FF52F8E54570d" target="_blank">Buy Now</a>
         </div>
         <div class="card disclaimer">
           <h3>Risk Disclaimer</h3>
@@ -118,17 +119,17 @@
       <h2>How to Buy</h2>
       <div class="grid">
         <div class="card"><h3>1) Wallet</h3><p>Install a wallet like MetaMask or Phantom.</p></div>
-        <div class="card"><h3>2) Funds</h3><p>Load your wallet with the chain’s native token (e.g. BNB, SOL).</p></div>
-        <div class="card"><h3>3) Swap</h3><p>Open the DEX, import the CIK contract, confirm the swap.</p></div>
+        <div class="card"><h3>2) Funds</h3><p>Load your wallet with the chain’s native token (e.g. BNB).</p></div>
+        <div class="card"><h3>3) Swap</h3><p>Import the CIK contract on the DEX and confirm the trade.</p></div>
       </div>
     </section>
 
     <section id="community">
       <h2>Community</h2>
       <div class="grid">
-        <a class="card" href="#" target="_blank"><h3>Telegram</h3><p>Join chats, announcements & giveaways.</p></a>
-        <a class="card" href="#" target="_blank"><h3>Twitter / X</h3><p>Memes, threads, and updates.</p></a>
-        <a class="card" href="#" target="_blank"><h3>Contract</h3><p>View official contract and explorer.</p></a>
+        <a class="card" href="https://t.me/cik3000" target="_blank"><h3>Telegram</h3><p>Join chats, announcements & giveaways.</p></a>
+        <a class="card" href="https://x.com/cik_coin" target="_blank"><h3>Twitter / X</h3><p>Memes, threads, and updates.</p></a>
+        <a class="card" href="https://bscscan.com/token/0x182976Fac92c6282C4afA9f63B3FF52F8E54570d" target="_blank"><h3>Contract</h3><p>View contract on BscScan.</p></a>
       </div>
     </section>
   </main>
@@ -138,19 +139,16 @@
   </footer>
 
   <script>
-    // Year
     document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Title animation: split into letters
     (function(){
       const title = document.getElementById('animatedTitle');
       const text = title.textContent.trim();
       title.textContent = "";
       [...text].forEach((ch,i)=>{
-        const span=document.createElement('span');
-        span.className='letter';
-        span.style.setProperty('--d', (i*50)+'ms');
-        span.textContent=ch;
+        const span = document.createElement('span');
+        span.className = 'letter';
+        span.style.setProperty('--d', `${i * 50}ms`);
+        span.textContent = ch;
         title.appendChild(span);
       });
       requestAnimationFrame(()=>title.classList.add('ready'));
