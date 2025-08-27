@@ -2,7 +2,7 @@
 const y = document.getElementById('year');
 if (y) y.textContent = new Date().getFullYear();
 
-// Animated headline: split into WORDS then LETTERS (prevents mid-word wrap)
+/* ===== Animated headline: WORDS then LETTERS (no mid-word wrap) ===== */
 (function () {
   const title = document.getElementById('animatedTitle');
   if (!title) return;
@@ -32,7 +32,7 @@ if (y) y.textContent = new Date().getFullYear();
     title.appendChild(wSpan);
     if (wi !== words.length - 1) {
       title.appendChild(document.createTextNode(' '));
-      i++; // tiny gap delay between words
+      i++;
     }
   });
 
@@ -47,7 +47,48 @@ if (y) y.textContent = new Date().getFullYear();
   }
 })();
 
-// Cards: Tilt 3D + Ripple
+/* ===== Responsive Navbar: Hamburger toggle ===== */
+(function(){
+  const nav = document.querySelector('nav.nav');
+  const btn = document.getElementById('menuToggle');
+  const menu = document.getElementById('navMenu');
+
+  if (!btn || !menu || !nav) return;
+
+  const closeMenu = () => {
+    nav.classList.remove('open');
+    btn.setAttribute('aria-expanded', 'false');
+    btn.setAttribute('aria-label', 'Open menu');
+  };
+
+  const openMenu = () => {
+    nav.classList.add('open');
+    btn.setAttribute('aria-expanded', 'true');
+    btn.setAttribute('aria-label', 'Close menu');
+  };
+
+  btn.addEventListener('click', () => {
+    nav.classList.contains('open') ? closeMenu() : openMenu();
+  });
+
+  // Close on link click
+  menu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => closeMenu());
+  });
+
+  // Close on outside click
+  document.addEventListener('click', (e) => {
+    if (!nav.classList.contains('open')) return;
+    if (!nav.contains(e.target)) closeMenu();
+  });
+
+  // Close on ESC
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeMenu();
+  });
+})();
+
+/* ===== Cards: Tilt 3D + Ripple ===== */
 (function(){
   const cards = Array.from(document.querySelectorAll('.card.interactive'));
   const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
