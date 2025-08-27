@@ -82,7 +82,7 @@ a{color:inherit; text-decoration:none}
 }
 .btn-gloss:hover::after{ transform: translate(220%, 0) rotate(8deg) }
 
-/* ghost button with 3D border */
+/* ghost button */
 .ghost{
   padding:11px 16px; border-radius:14px; font-weight:800; color:var(--ink);
   border:1px solid var(--ring); position:relative; transform: translateZ(8px);
@@ -184,4 +184,4 @@ footer{background:#0d1116; border-top:1px solid var(--ring); padding-block:32px;
 /* reduce motion */
 @media (prefers-reduced-motion: reduce){
   .menu .nav-link, .cta, .ghost, .reveal, .menu-mobile .panel{transition:none !important; animation:none !important}
-}
+        }
