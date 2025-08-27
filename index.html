@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-anim="on">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -7,14 +7,12 @@
   <meta name="description" content="Chick Coin (CIK) — a playful meme coin for fun and community vibes. ⚠️ Crypto is risky." />
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;700;900&display=swap" rel="stylesheet">
 
-  <!-- Critical CSS (preloader basics + lock scroll) -->
+  <!-- Critical CSS (preloader + lock scroll) -->
   <style>
     #preloader{position:fixed;inset:0;background:#fff9e8;display:flex;align-items:center;justify-content:center;z-index:2000}
     #preloader .loader{text-align:center}
     #preloader #progress{font:900 1.4rem "Nunito",sans-serif;color:#6b5730;margin-top:12px}
     .no-scroll, .no-scroll body {overflow:hidden;height:100%}
-
-    /* basic motions so preloader animates even before style.css loads */
     .egg{width:140px;height:190px;position:relative;display:inline-block;animation:eggShake 1.2s ease-in-out infinite}
     #chick{position:absolute;left:50%;top:60%;transform:translate(-50%,-50%) scale(0);font-size:3.4rem;opacity:0}
     @keyframes eggShake{
@@ -25,7 +23,6 @@
       60%{transform:translateY(0) rotate(2deg)}
       75%{transform:translateY(-1px) rotate(-1deg)}
     }
-    /* crack + hatch states (fallback) */
     #preloader.show-crack #crack{opacity:1;animation:drawCrack .8s ease forwards}
     @keyframes drawCrack{to{stroke-dashoffset:0}}
     #preloader.hatch .egg{animation:none}
@@ -41,7 +38,7 @@
 </head>
 <body class="theme-chick">
 
-  <!-- ===== PRELOADER (Whole egg -> crack -> split + feathers) ===== -->
+  <!-- ===== PRELOADER (Whole egg -> crack -> split) ===== -->
   <div id="preloader" aria-hidden="true">
     <div class="loader">
       <div class="egg">
@@ -96,7 +93,10 @@
   <header>
     <div class="container hero">
       <span class="badge">🐥 Chick Coin (CIK) • Official Meme Coin</span>
-      <h1 id="animatedTitle">Chick Coin — fun, friendly, and community-first</h1>
+
+      <!-- عنوان محسن بلون عشبي + ذهبي -->
+      <h1 id="animatedTitle" class="grass">Chick Coin — fun, friendly, and community-first</h1>
+
       <p class="lead">Cute vibes. Fair fun. Clear delivery. No financial advice — just memes.</p>
       <div class="actions">
         <a class="btn btn-primary" href="#buy">Buy CIK</a>
@@ -176,19 +176,6 @@
       if(p >= 60 && !pre.classList.contains('show-crack')) pre.classList.add('show-crack');
       if(p === 100){
         pre.classList.add('hatch');
-
-        /* 🪶 Feathers on hatch (fallback too) */
-        for (var i=0;i<12;i++){
-          var feather=document.createElement('div');
-          feather.className='feather';
-          feather.textContent='🪶';
-          feather.style.left=(Math.random()*100)+'vw';
-          feather.style.fontSize=(Math.random()*1+0.8)+'rem';
-          feather.style.animationDuration=(Math.random()*2+3)+'s';
-          document.body.appendChild(feather);
-          feather.addEventListener('animationend', (function(f){ return function(){ f.remove(); };})(feather));
-        }
-
         setTimeout(function(){
           pre.style.transition = 'opacity .6s ease';
           pre.style.opacity = '0';
