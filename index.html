@@ -6,10 +6,21 @@
   <title>Chick Coin (CIK) — Fun Meme Coin for Community</title>
   <meta name="description" content="Chick Coin (CIK) — a playful meme coin for fun and community vibes. ⚠️ Crypto is risky." />
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;700;900&display=swap" rel="stylesheet">
+
+  <!-- Critical CSS for preloader -->
+  <style>
+    #preloader{position:fixed;inset:0;background:#fff9e8;display:flex;align-items:center;justify-content:center;z-index:2000}
+    #preloader .loader{text-align:center}
+    #preloader #egg{font-size:4rem;margin-bottom:14px;transition:transform .4s ease}
+    #preloader #progress{font:900 1.4rem "Nunito",sans-serif;color:#6b5730}
+    .no-scroll, .no-scroll body {overflow:hidden;height:100%}
+  </style>
+  <script>document.documentElement.classList.add('no-scroll');</script>
+
   <link rel="stylesheet" href="style.css">
 </head>
 <body class="theme-chick">
-  <!-- ===== PRELOADER (Egg -> Chick) ===== -->
+  <!-- ===== PRELOADER ===== -->
   <div id="preloader" aria-hidden="true">
     <div class="loader">
       <div id="egg" aria-label="Loading">🥚</div>
