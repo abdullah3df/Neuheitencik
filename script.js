@@ -2,13 +2,13 @@
 const y = document.getElementById('year');
 if (y) y.textContent = new Date().getFullYear();
 
-/* ===== Preloader: 0–60% crack, 100% hatch ===== */
+/* ===== Preloader: 0–60% crack, 100% hatch + feathers ===== */
 (function(){
   const preloader  = document.getElementById("preloader");
   const progressEl = document.getElementById("progress");
   if (!preloader || !progressEl) return;
 
-  // لو اشتغلت نسخة fallback، لا نكرر
+  // إذا كان fallback inline شغال، لا نكرر
   if (preloader.dataset.jsReady) return;
   preloader.dataset.jsReady = "1";
 
@@ -23,6 +23,19 @@ if (y) y.textContent = new Date().getFullYear();
 
     if (p === 100){
       preloader.classList.add('hatch');
+
+      // 🪶 Feathers on hatch (main script)
+      for (let i = 0; i < 12; i++) {
+        const feather = document.createElement('div');
+        feather.className = 'feather';
+        feather.textContent = '🪶';
+        feather.style.left = Math.random() * 100 + 'vw';
+        feather.style.fontSize = (Math.random() * 1 + 0.8) + 'rem';
+        feather.style.animationDuration = (Math.random() * 2 + 3) + 's';
+        document.body.appendChild(feather);
+        feather.addEventListener('animationend', () => feather.remove());
+      }
+
       setTimeout(() => {
         preloader.style.transition = "opacity .6s ease";
         preloader.style.opacity = "0";
