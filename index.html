@@ -3,62 +3,81 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>CIK — A Meme Coin for Fun</title>
-  <meta name="description" content="CIK — a meme coin for fun and community vibes. ⚠️ Crypto is risky, you may lose your funds." />
+  <title>CIK — Community Chick Meme Coin</title>
+  <meta name="description" content="CIK — the community chick meme coin. Bright vibes, fair fun, community-first. ⚠️ Crypto is risky." />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg1:#fff9e9; --bg2:#fff2cd; --bg3:#ffe27a;
-      --gold:#f3c94d; --gold-dark:#d9a82e;
-      --ink:#2a230b; --muted:#7a6a2c; --ring:#e7d18a;
+      /* Refined palette (higher contrast & richer gold) */
+      --bg1:#fff9e6; --bg2:#fff0c7; --bg3:#ffe075;
+      --gold:#f4c84f; --gold-mid:#f0bd3a; --gold-dark:#d19a22;
+      --ink:#221a05; --muted:#6e5c24; --ring:#e6cf8a;
       --shadow:0 18px 60px rgba(0,0,0,.12);
       --radius:18px;
     }
     *{box-sizing:border-box}
     body{
-      margin:0; font-family:"Outfit",sans-serif; line-height:1.6; color:var(--ink);
+      margin:0; font-family:"Outfit",sans-serif; line-height:1.65; color:var(--ink);
       background:
-        radial-gradient(1200px 700px at 20% -10%, var(--bg2) 0%, transparent 60%),
-        radial-gradient(1200px 700px at 120% 0%, var(--bg3) 0%, transparent 55%),
+        radial-gradient(1200px 700px at 18% -10%, var(--bg2) 0%, transparent 60%),
+        radial-gradient(1200px 700px at 115% 0%, var(--bg3) 0%, transparent 55%),
         radial-gradient(circle at 30% 20%, var(--bg1) 0%, var(--bg2) 40%, var(--bg3) 100%);
     }
     a{color:inherit; text-decoration:none}
     .container{max-width:1100px; margin:auto; padding:0 18px}
 
     /* NAV */
-    nav{position:sticky;top:0;backdrop-filter:blur(8px);background:#fff9e9aa;border-bottom:1px solid var(--ring)}
+    nav{
+      position:sticky; top:0; z-index:10;
+      backdrop-filter: blur(8px) saturate(140%);
+      background:linear-gradient(180deg,#fff8eccc,#fff8e666);
+      border-bottom:1px solid var(--ring)
+    }
     .nav-wrap{display:flex;justify-content:space-between;align-items:center;height:64px}
     .brand{font-weight:900;display:flex;align-items:center;gap:8px}
-    .dot{width:14px;height:14px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#fff6cc,var(--gold));box-shadow:0 0 12px #f3c94d88}
+    .dot{width:14px;height:14px;border-radius:50%;
+      background:radial-gradient(circle at 30% 30%,#fff6cc,var(--gold));
+      box-shadow:0 0 12px #f4c84f88}
     .menu{display:flex;gap:16px}
-    .menu a{font-weight:700;position:relative;opacity:.9;transition:.2s}
+    .menu a{font-weight:700;position:relative;opacity:.92;transition:.2s}
     .menu a:hover{opacity:1;transform:translateY(-2px)}
-    .menu a::after{content:"";position:absolute;left:6px;right:6px;bottom:4px;height:3px;border-radius:3px;background:linear-gradient(90deg,var(--gold),var(--gold-dark));transform:scaleX(.15);transform-origin:left;transition:.25s}
+    .menu a::after{
+      content:"";position:absolute;left:6px;right:6px;bottom:4px;height:3px;border-radius:3px;
+      background:linear-gradient(90deg,var(--gold),var(--gold-dark));
+      transform:scaleX(.15);transform-origin:left;transition:.25s
+    }
     .menu a:hover::after{transform:scaleX(1)}
 
     /* HERO */
-    header{padding:60px 0 30px}
-    .badge{display:inline-block;padding:8px 12px;border:1px solid var(--ring);border-radius:999px;background:#fffdf6aa;color:var(--muted);font-weight:600}
-    h1{margin:16px 0;font-size:clamp(2rem,6vw,3.2rem);font-weight:900}
-    h1 .letter{display:inline-block;opacity:0;transform:translateY(16px) rotate(-2deg);animation:floatIn .8s forwards;animation-delay:var(--d)}
+    header{padding:62px 0 30px}
+    .badge{
+      display:inline-block;padding:8px 12px;border:1px solid var(--ring);border-radius:999px;
+      background:#fffdf7cc;color:var(--muted);font-weight:700
+    }
+    h1{margin:16px 0 6px;font-size:clamp(2.1rem,6vw,3.4rem);font-weight:900;letter-spacing:.2px}
+    /* animated letters */
+    h1 .letter{display:inline-block;opacity:0;transform:translateY(16px) rotate(-2deg);
+      animation:floatIn .8s forwards;animation-delay:var(--d);
+      background:linear-gradient(90deg,var(--gold),var(--gold-dark)); -webkit-background-clip:text; background-clip:text; color:transparent}
     h1.ready .letter{opacity:1}
-    h1 .letter:hover{animation:wiggle .6s; color:#b38712;text-shadow:0 4px 16px rgba(217,168,46,.4)}
+    h1 .letter:hover{animation:wiggle .6s; filter:drop-shadow(0 4px 16px rgba(210,154,34,.45))}
     @keyframes floatIn{from{opacity:0;transform:translateY(18px) rotate(-5deg) scale(.96)}to{opacity:1;transform:none}}
     @keyframes wiggle{0%{transform:none}40%{transform:translateY(-6px) rotate(2deg)}100%{transform:none}}
-    .lead{color:var(--muted);font-weight:600;margin:0 0 18px}
+
+    .lead{color:var(--muted); font-weight:700; margin:4px 0 18px}
     .actions{display:flex;gap:12px;flex-wrap:wrap}
     .btn{padding:12px 18px;border-radius:14px;font-weight:800;transition:.2s;box-shadow:var(--shadow),inset 0 1px 0 #fff6}
-    .btn-ghost{border:1px solid var(--ring);background:#fffaf0aa;color:var(--muted)}
+    .btn-ghost{border:1px solid var(--ring);background:#fffaf0cc;color:var(--muted)}
     .btn-ghost:hover{transform:translateY(-2px);box-shadow:0 16px 36px rgba(0,0,0,.12)}
 
     /* CARDS */
     .grid{display:grid;gap:16px;margin:24px 0;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
     .card{background:#fffefb;border:1px solid var(--ring);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
     .card h3{margin:6px 0 10px}
-    .card p{margin:0 0 12px;color:#4d3f18;overflow-wrap:break-word;word-break:break-word}
+    .card p{margin:0 0 12px;color:#4e3f18;overflow-wrap:break-word;word-break:break-word}
+    .btn-primary{background:linear-gradient(135deg,var(--gold),var(--gold-mid),var(--gold-dark));color:#2b2207}
+    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 18px 42px rgba(209,154,34,.32),inset 0 1px 0 #fff6}
     .card.buy .btn-primary{width:100%;display:block;text-align:center}
-    .btn-primary{background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:#2d2408}
-    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 18px 42px rgba(217,168,46,.32),inset 0 1px 0 #fff6}
     .card.disclaimer{background:#fff1ea;border-color:#f2c3b0}
     .card.disclaimer h3{color:#8b2f1f}
     .card.disclaimer p{color:#6b3a2a}
@@ -81,12 +100,13 @@
     </div>
   </nav>
 
-  <!-- HERO -->
+  <!-- HERO (single interactive headline) -->
   <header>
     <div class="container">
-      <span class="badge">🐥 CIK • Meme Coin</span>
-      <h1 id="animatedTitle">A Meme Coin for Fun and Community</h1>
-      <p class="lead">CIK is a meme coin built for fun, memes, and community vibes. No fake promises — just transparency and playful energy.</p>
+      <span class="badge">🐥 CIK • Official Meme Coin</span>
+      <!-- NEW animated phrase with brand + marketing line -->
+      <h1 id="animatedTitle">CIK — The Community Chick Meme Coin</h1>
+      <p class="lead">Bright vibes. Fair fun. Community-first. No hype — just memes and clean delivery.</p>
       <div class="actions">
         <a class="btn btn-ghost" href="#accounts">Join the Community</a>
       </div>
@@ -102,6 +122,7 @@
           <p>CIK is a <b>meme coin</b> inspired by the chick — simple, playful, and community-driven. It’s about memes, fun, and vibes.</p>
         </div>
 
+        <!-- Only buy button here -->
         <div class="card buy" id="buy">
           <h3>Ready to Buy?</h3>
           <p>Swap for CIK on PancakeSwap.</p>
@@ -153,16 +174,16 @@
     // Year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Interactive Title
+    // Interactive Gradient Title (brand + slogan)
     (function(){
       const title = document.getElementById('animatedTitle');
       const text = title.textContent.trim();
       title.textContent = "";
       [...text].forEach((ch,i)=>{
-        const span=document.createElement('span');
-        span.className='letter';
-        span.style.setProperty('--d', (i*50)+'ms');
-        span.textContent=ch;
+        const span = document.createElement('span');
+        span.className = 'letter';
+        span.style.setProperty('--d', `${i*50}ms`);
+        span.textContent = ch;
         title.appendChild(span);
       });
       requestAnimationFrame(()=>title.classList.add('ready'));
