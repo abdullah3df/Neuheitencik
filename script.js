@@ -2,36 +2,39 @@
 const y = document.getElementById('year');
 if (y) y.textContent = new Date().getFullYear();
 
-/* ===== Preloader: progress + cracking egg + chick pop ===== */
+/* ===== Preloader: 0–60% crack, 100% hatch ===== */
 (function(){
-  const progressEl = document.getElementById("progress");
   const preloader  = document.getElementById("preloader");
-  const chickEl    = document.getElementById("chick");
-  if (!progressEl || !preloader || !chickEl) return;
+  const progressEl = document.getElementById("progress");
+  if (!preloader || !progressEl) return;
 
-  let progress = 0;
+  // لو اشتغلت نسخة fallback، لا نكرر
+  if (preloader.dataset.jsReady) return;
+  preloader.dataset.jsReady = "1";
 
-  const step = () => {
-    progress += 2;                     // increment %
-    if (progress > 100) progress = 100;
-    progressEl.textContent = progress + "%";
+  let p = 0;
+  function step(){
+    p += 2; if (p > 100) p = 100;
+    progressEl.textContent = p + "%";
 
-    if (progress === 100) {
-      // trigger crack animation
+    if (p >= 60 && !preloader.classList.contains('show-crack')){
+      preloader.classList.add('show-crack');
+    }
+
+    if (p === 100){
       preloader.classList.add('hatch');
-      // fade out after the animation
       setTimeout(() => {
-        preloader.style.transition = "opacity 0.6s ease";
+        preloader.style.transition = "opacity .6s ease";
         preloader.style.opacity = "0";
         setTimeout(() => {
           preloader.style.display = "none";
-          document.documentElement.classList.remove('no-scroll'); // enable scroll
+          document.documentElement.classList.remove('no-scroll');
         }, 600);
-      }, 950); // wait for crack+chick animation
+      }, 950);
     } else {
-      setTimeout(step, 80);            // speed
+      setTimeout(step, 80);
     }
-  };
+  }
   step();
 })();
 
@@ -107,7 +110,7 @@ if (y) y.textContent = new Date().getFullYear();
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMenu(); });
 })();
 
-/* ===== Cards: small ripple feedback ===== */
+/* ===== Cards: ripple feedback ===== */
 (function(){
   document.querySelectorAll('.card.interactive').forEach(card=>{
     card.addEventListener('pointerdown',(e)=>{
