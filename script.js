@@ -1,8 +1,37 @@
-// Footer year
+// ===== Footer year =====
 const y = document.getElementById('year');
 if (y) y.textContent = new Date().getFullYear();
 
-/* Animated headline: WORDS then LETTERS (prevents mid-word wrap) */
+/* ===== Preloader: Egg -> Chick at 100% ===== */
+(function(){
+  const progressEl = document.getElementById("progress");
+  const eggEl = document.getElementById("egg");
+  const preloader = document.getElementById("preloader");
+  if (!progressEl || !eggEl || !preloader) return;
+
+  let progress = 0;
+  const step = () => {
+    progress += 2;                 // سرعة الزيادة (2%)
+    if (progress > 100) progress = 100;
+    progressEl.textContent = progress + "%";
+
+    if (progress === 100) {
+      eggEl.textContent = "🐥";
+      eggEl.style.transform = "scale(1.2)";
+      setTimeout(() => {
+        preloader.style.transition = "opacity 0.6s ease";
+        preloader.style.opacity = "0";
+        setTimeout(() => { preloader.style.display = "none"; }, 600);
+      }, 800);
+    } else {
+      setTimeout(step, 80);        // كل 80ms
+    }
+  };
+  // بدء العدّاد فور تحميل DOM
+  step();
+})();
+
+/* ===== Animated headline: WORDS -> LETTERS (no mid-word wrap) ===== */
 (function () {
   const title = document.getElementById('animatedTitle');
   if (!title) return;
@@ -47,12 +76,11 @@ if (y) y.textContent = new Date().getFullYear();
   }
 })();
 
-/* Responsive Navbar: Hamburger toggle */
+/* ===== Responsive Navbar: Hamburger toggle ===== */
 (function(){
   const nav = document.querySelector('nav.nav');
   const btn = document.getElementById('menuToggle');
   const menu = document.getElementById('navMenu');
-
   if (!btn || !menu || !nav) return;
 
   const closeMenu = () => {
@@ -60,7 +88,6 @@ if (y) y.textContent = new Date().getFullYear();
     btn.setAttribute('aria-expanded', 'false');
     btn.setAttribute('aria-label', 'Open menu');
   };
-
   const openMenu = () => {
     nav.classList.add('open');
     btn.setAttribute('aria-expanded', 'true');
@@ -71,13 +98,12 @@ if (y) y.textContent = new Date().getFullYear();
     nav.classList.contains('open') ? closeMenu() : openMenu();
   });
 
-  // Close on link click / outside / ESC
   menu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
   document.addEventListener('click', (e) => { if (nav.classList.contains('open') && !nav.contains(e.target)) closeMenu(); });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMenu(); });
 })();
 
-/* Card Ripple (friendly click feedback) */
+/* ===== Cards: small ripple feedback ===== */
 (function(){
   document.querySelectorAll('.card.interactive').forEach(card=>{
     card.addEventListener('pointerdown',(e)=>{
@@ -92,7 +118,10 @@ if (y) y.textContent = new Date().getFullYear();
         transition:transform .6s ease, opacity .6s ease;
       `;
       card.appendChild(bubble);
-      requestAnimationFrame(()=>{ bubble.style.transform='translate(-50%,-50%) scale(14)'; bubble.style.opacity='0'; });
+      requestAnimationFrame(()=>{
+        bubble.style.transform='translate(-50%,-50%) scale(14)';
+        bubble.style.opacity='0';
+      });
       bubble.addEventListener('transitionend', ()=> bubble.remove());
     },{passive:true});
   });
