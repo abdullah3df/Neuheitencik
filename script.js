@@ -2,7 +2,7 @@
 const y = document.getElementById('year');
 if (y) y.textContent = new Date().getFullYear();
 
-/* ===== Animated headline: WORDS then LETTERS (no mid-word wrap) ===== */
+/* Animated headline: WORDS then LETTERS (prevents mid-word wrap) */
 (function () {
   const title = document.getElementById('animatedTitle');
   if (!title) return;
@@ -14,7 +14,7 @@ if (y) y.textContent = new Date().getFullYear();
                  window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   const words = text.split(' ');
-  let i = 0; // letter index for staggered delay
+  let i = 0; // letter index for stagger
 
   words.forEach((w, wi) => {
     const wSpan = document.createElement('span');
@@ -23,7 +23,7 @@ if (y) y.textContent = new Date().getFullYear();
     [...w].forEach((ch) => {
       const l = document.createElement('span');
       l.className = 'letter';
-      l.style.setProperty('--d', `${i * 50}ms`);
+      l.style.setProperty('--d', `${i * 45}ms`);
       l.textContent = ch;
       wSpan.appendChild(l);
       i++;
@@ -47,7 +47,7 @@ if (y) y.textContent = new Date().getFullYear();
   }
 })();
 
-/* ===== Responsive Navbar: Hamburger toggle ===== */
+/* Responsive Navbar: Hamburger toggle */
 (function(){
   const nav = document.querySelector('nav.nav');
   const btn = document.getElementById('menuToggle');
@@ -71,54 +71,29 @@ if (y) y.textContent = new Date().getFullYear();
     nav.classList.contains('open') ? closeMenu() : openMenu();
   });
 
-  // Close on link click
-  menu.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => closeMenu());
-  });
-
-  // Close on outside click
-  document.addEventListener('click', (e) => {
-    if (!nav.classList.contains('open')) return;
-    if (!nav.contains(e.target)) closeMenu();
-  });
-
-  // Close on ESC
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeMenu();
-  });
+  // Close on link click / outside / ESC
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+  document.addEventListener('click', (e) => { if (nav.classList.contains('open') && !nav.contains(e.target)) closeMenu(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMenu(); });
 })();
 
-/* ===== Cards: Tilt 3D + Ripple ===== */
+/* Card Ripple (friendly click feedback) */
 (function(){
-  const cards = Array.from(document.querySelectorAll('.card.interactive'));
-  const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  cards.forEach(card => {
-    // Tilt
-    if (!reduce) {
-      const maxTilt = 8;
-      const reset = () => { card.style.transform = ''; };
-      card.addEventListener('mousemove', (e)=>{
-        const r = card.getBoundingClientRect();
-        const x = e.clientX - r.left, y = e.clientY - r.top;
-        const rx = ((y/r.height) - .5) * -maxTilt;
-        const ry = ((x/r.width)  - .5) *  maxTilt;
-        card.style.transform = `translateY(-6px) rotateX(${rx}deg) rotateY(${ry}deg)`;
-      });
-      card.addEventListener('mouseleave', reset);
-      card.addEventListener('blur', reset);
-    }
-
-    // Ripple
-    card.addEventListener('pointerdown', (e)=>{
-      const r = card.getBoundingClientRect();
-      const x = e.clientX - r.left, y = e.clientY - r.top;
-      const ripple = document.createElement('span');
-      ripple.className = 'card-ripple';
-      ripple.style.left = x + 'px';
-      ripple.style.top  = y + 'px';
-      card.appendChild(ripple);
-      ripple.addEventListener('animationend', ()=> ripple.remove());
-    }, {passive:true});
+  document.querySelectorAll('.card.interactive').forEach(card=>{
+    card.addEventListener('pointerdown',(e)=>{
+      const r=card.getBoundingClientRect();
+      const x=e.clientX-r.left, y=e.clientY-r.top;
+      const bubble=document.createElement('span');
+      bubble.style.cssText=`
+        position:absolute; left:${x}px; top:${y}px;
+        width:8px; height:8px; border-radius:50%;
+        background:radial-gradient(circle,#ffffffaa 0%, #ffffff55 60%, transparent 70%);
+        transform:translate(-50%,-50%) scale(0); pointer-events:none; opacity:1;
+        transition:transform .6s ease, opacity .6s ease;
+      `;
+      card.appendChild(bubble);
+      requestAnimationFrame(()=>{ bubble.style.transform='translate(-50%,-50%) scale(14)'; bubble.style.opacity='0'; });
+      bubble.addEventListener('transitionend', ()=> bubble.remove());
+    },{passive:true});
   });
 })();
