@@ -7,12 +7,32 @@
   <meta name="description" content="Chick Coin (CIK) — a playful meme coin for fun and community vibes. ⚠️ Crypto is risky." />
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;700;900&display=swap" rel="stylesheet">
 
-  <!-- Critical CSS for preloader (so no black flash) -->
+  <!-- Critical CSS (preloader + lock scroll to avoid black flash) -->
   <style>
     #preloader{position:fixed;inset:0;background:#fff9e8;display:flex;align-items:center;justify-content:center;z-index:2000}
     #preloader .loader{text-align:center}
-    #preloader #progress{font:900 1.4rem "Nunito",sans-serif;color:#6b5730;margin-top:10px}
+    #preloader #progress{font:900 1.4rem "Nunito",sans-serif;color:#6b5730;margin-top:12px}
     .no-scroll, .no-scroll body {overflow:hidden;height:100%}
+    /* basic animation so preloader moves even before style.css loads */
+    .egg{width:140px;height:190px;position:relative;display:inline-block;animation:eggShake 1.2s ease-in-out infinite}
+    #chick{position:absolute;left:50%;top:60%;transform:translate(-50%,-50%) scale(0);font-size:3.4rem;opacity:0}
+    @keyframes eggShake{
+      0%,100%{transform:translateY(0) rotate(0)}
+      15%{transform:translateY(-2px) rotate(-4deg)}
+      30%{transform:translateY(0) rotate(3deg)}
+      45%{transform:translateY(-1px) rotate(-2deg)}
+      60%{transform:translateY(0) rotate(2deg)}
+      75%{transform:translateY(-1px) rotate(-1deg)}
+    }
+    /* crack + hatch immediate states (for fallback) */
+    #preloader.show-crack #crack{opacity:1;animation:drawCrack .8s ease forwards}
+    @keyframes drawCrack{to{stroke-dashoffset:0}}
+    #preloader.hatch .egg{animation:none}
+    #preloader.hatch #eggWhole{opacity:0;transition:opacity .25s ease}
+    #preloader.hatch #leftHalf,#preloader.hatch #rightHalf{opacity:1}
+    #preloader.hatch #leftHalf{transform-origin:68px 100px;transition:.8s ease;transform:translate(-28px,-12px) rotate(-24deg)}
+    #preloader.hatch #rightHalf{transform-origin:72px 100px;transition:.8s ease;transform:translate(28px,-12px) rotate(24deg)}
+    #preloader.hatch #chick{transition:.8s .2s ease;transform:translate(-50%,-58%) scale(1);opacity:1}
   </style>
   <script>document.documentElement.classList.add('no-scroll');</script>
 
@@ -20,29 +40,43 @@
 </head>
 <body class="theme-chick">
 
-  <!-- ===== PRELOADER (Egg -> crack -> Chick) ===== -->
+  <!-- ===== PRELOADER (Whole egg -> crack -> split) ===== -->
   <div id="preloader" aria-hidden="true">
     <div class="loader">
-      <!-- SVG egg (two halves) -->
-      <div class="egg" aria-label="Loading">
-        <svg width="120" height="160" viewBox="0 0 120 160" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- yolk glow -->
-          <ellipse cx="60" cy="90" rx="30" ry="38" fill="#FFE59A" opacity=".35"/>
-          <!-- left half -->
-          <path id="eggLeft" d="M60 20 C35 20, 15 50, 15 85 C15 120, 35 145, 60 145 L60 90 L52 96 L46 88 L40 98 L34 90 L28 100 L22 92 L18 100 L15 95 C15 70, 30 40, 60 20 Z"
-                fill="#FFFFFF" stroke="#F2E0A9" stroke-width="2"/>
-          <!-- right half -->
-          <path id="eggRight" d="M60 20 C85 20, 105 50, 105 85 C105 120, 85 145, 60 145 L60 90 L68 96 L74 88 L80 98 L86 90 L92 100 L98 92 L102 100 L105 95 C105 70, 90 40, 60 20 Z"
-                fill="#FFFFFF" stroke="#F2E0A9" stroke-width="2"/>
+      <div class="egg">
+        <svg class="egg-svg" width="140" height="180" viewBox="0 0 140 180" xmlns="http://www.w3.org/2000/svg">
+          <!-- glow -->
+          <ellipse cx="70" cy="95" rx="36" ry="46" fill="#FFE59A" opacity=".28"/>
+          <!-- WHOLE EGG -->
+          <defs>
+            <radialGradient id="shellGrad" cx="35%" cy="25%" r="90%">
+              <stop offset="0%" stop-color="#FFFFFF"/>
+              <stop offset="60%" stop-color="#FFF7E5"/>
+              <stop offset="100%" stop-color="#F8E9C2"/>
+            </radialGradient>
+          </defs>
+          <path id="eggWhole"
+                d="M70 18 C36 18, 12 52, 12 92 C12 132, 36 162, 70 162 C104 162, 128 132, 128 92 C128 52, 104 18, 70 18 Z"
+                fill="url(#shellGrad)" stroke="#F2E0A9" stroke-width="2"/>
+          <!-- CRACK (hidden until 60%) -->
+          <path id="crack" d="M25 95 L40 88 L50 98 L60 86 L70 100 L80 86 L90 98 L100 88 L115 95"
+                fill="none" stroke="#D9B871" stroke-width="3" stroke-linejoin="round"
+                stroke-dasharray="260" stroke-dashoffset="260" opacity="0"/>
+          <!-- SPLIT HALVES (hidden until hatch) -->
+          <path id="leftHalf"
+                d="M70 18 C36 18, 12 52, 12 92 C12 132, 36 162, 70 162 L70 100 L62 106 L54 94 L46 104 L38 92 L30 102 L24 94 L20 102 L18 96 C18 70, 34 38, 70 18 Z"
+                fill="url(#shellGrad)" stroke="#F2E0A9" stroke-width="2" opacity="0"/>
+          <path id="rightHalf"
+                d="M70 18 C104 18, 128 52, 128 92 C128 132, 104 162, 70 162 L70 100 L78 106 L86 94 L94 104 L102 92 L110 102 L116 94 L120 102 L122 96 C122 70, 106 38, 70 18 Z"
+                fill="url(#shellGrad)" stroke="#F2E0A9" stroke-width="2" opacity="0"/>
         </svg>
-        <!-- hidden chick -->
-        <div id="chick">🐥</div>
+        <div id="chick" aria-hidden="true">🐥</div>
       </div>
       <div id="progress">0%</div>
     </div>
   </div>
 
-  <!-- NAV -->
+  <!-- ===== NAV ===== -->
   <nav class="nav" aria-label="Main">
     <div class="container nav-wrap">
       <div class="brand">
@@ -61,7 +95,7 @@
     </div>
   </nav>
 
-  <!-- HERO -->
+  <!-- ===== HERO ===== -->
   <header>
     <div class="container hero">
       <span class="badge">🐥 Chick Coin (CIK) • Official Meme Coin</span>
@@ -74,7 +108,7 @@
     </div>
   </header>
 
-  <!-- ABOUT / CARDS -->
+  <!-- ===== CONTENT ===== -->
   <main class="container">
     <section id="about">
       <div class="grid">
@@ -109,7 +143,7 @@
     </section>
   </main>
 
-  <!-- OFFICIAL ACCOUNTS -->
+  <!-- ===== ACCOUNTS ===== -->
   <section id="accounts" class="container">
     <h2>Official Accounts</h2>
     <div class="grid">
@@ -132,6 +166,32 @@
     © <span id="year"></span> Chick Coin (CIK) — For entertainment only. Crypto is risky.
   </footer>
 
-  <script src="script.js"></script>
+  <!-- Fallback inline JS (ensures preloader works even if external JS delays) -->
+  <script>
+  (function(){
+    var pre = document.getElementById('preloader');
+    var prog = document.getElementById('progress');
+    if(!pre || !prog) return;
+    var p = 0;
+    (function tick(){
+      p += 2; if(p>100) p = 100;
+      prog.textContent = p + '%';
+      if(p >= 60 && !pre.classList.contains('show-crack')) pre.classList.add('show-crack');
+      if(p === 100){
+        pre.classList.add('hatch');
+        setTimeout(function(){
+          pre.style.transition = 'opacity .6s ease';
+          pre.style.opacity = '0';
+          setTimeout(function(){
+            pre.style.display = 'none';
+            document.documentElement.classList.remove('no-scroll');
+          }, 600);
+        }, 950);
+      } else { setTimeout(tick, 80); }
+    })();
+  })();
+  </script>
+
+  <script src="script.js" defer></script>
 </body>
 </html>
