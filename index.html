@@ -7,12 +7,11 @@
   <meta name="description" content="Chick Coin (CIK) — a playful meme coin for fun and community vibes. ⚠️ Crypto is risky." />
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;700;900&display=swap" rel="stylesheet">
 
-  <!-- Critical CSS for preloader -->
+  <!-- Critical CSS for preloader (so no black flash) -->
   <style>
     #preloader{position:fixed;inset:0;background:#fff9e8;display:flex;align-items:center;justify-content:center;z-index:2000}
     #preloader .loader{text-align:center}
-    #preloader #egg{font-size:4rem;margin-bottom:14px;transition:transform .4s ease}
-    #preloader #progress{font:900 1.4rem "Nunito",sans-serif;color:#6b5730}
+    #preloader #progress{font:900 1.4rem "Nunito",sans-serif;color:#6b5730;margin-top:10px}
     .no-scroll, .no-scroll body {overflow:hidden;height:100%}
   </style>
   <script>document.documentElement.classList.add('no-scroll');</script>
@@ -20,10 +19,25 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body class="theme-chick">
-  <!-- ===== PRELOADER ===== -->
+
+  <!-- ===== PRELOADER (Egg -> crack -> Chick) ===== -->
   <div id="preloader" aria-hidden="true">
     <div class="loader">
-      <div id="egg" aria-label="Loading">🥚</div>
+      <!-- SVG egg (two halves) -->
+      <div class="egg" aria-label="Loading">
+        <svg width="120" height="160" viewBox="0 0 120 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- yolk glow -->
+          <ellipse cx="60" cy="90" rx="30" ry="38" fill="#FFE59A" opacity=".35"/>
+          <!-- left half -->
+          <path id="eggLeft" d="M60 20 C35 20, 15 50, 15 85 C15 120, 35 145, 60 145 L60 90 L52 96 L46 88 L40 98 L34 90 L28 100 L22 92 L18 100 L15 95 C15 70, 30 40, 60 20 Z"
+                fill="#FFFFFF" stroke="#F2E0A9" stroke-width="2"/>
+          <!-- right half -->
+          <path id="eggRight" d="M60 20 C85 20, 105 50, 105 85 C105 120, 85 145, 60 145 L60 90 L68 96 L74 88 L80 98 L86 90 L92 100 L98 92 L102 100 L105 95 C105 70, 90 40, 60 20 Z"
+                fill="#FFFFFF" stroke="#F2E0A9" stroke-width="2"/>
+        </svg>
+        <!-- hidden chick -->
+        <div id="chick">🐥</div>
+      </div>
       <div id="progress">0%</div>
     </div>
   </div>
@@ -35,14 +49,9 @@
         <span class="dot" aria-hidden="true"></span>
         <b>Chick Coin (CIK)</b>
       </div>
-
-      <!-- Hamburger -->
-      <button class="menu-toggle" id="menuToggle"
-              aria-label="Open menu" aria-controls="navMenu" aria-expanded="false">
+      <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-controls="navMenu" aria-expanded="false">
         <span class="bar"></span><span class="bar"></span><span class="bar"></span>
       </button>
-
-      <!-- Menu -->
       <div class="menu" id="navMenu">
         <a href="#about">About</a>
         <a href="#buy">Buy</a>
@@ -74,7 +83,6 @@
           <p><b>Chick Coin</b> is a <b>meme coin</b> built for fun and community. Lighthearted brand, transparent vibe, and simple UX.</p>
         </div>
 
-        <!-- BUY -->
         <div class="card interactive buy" id="buy">
           <h3>Ready to Buy?</h3>
           <p>Swap for <b>Chick Coin (CIK)</b> on PancakeSwap.</p>
