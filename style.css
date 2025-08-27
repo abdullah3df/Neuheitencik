@@ -22,30 +22,36 @@ body{
 a{color:inherit; text-decoration:none}
 .container{max-width:1100px;margin:auto;padding:0 18px}
 
-/* ===== PRELOADER (full styling & animations) ===== */
-#preloader{ /* critical basics are in <head>, here extra cosmetics */
-  backdrop-filter: blur(4px);
-}
-.egg{width:120px;height:170px;position:relative;display:inline-block;animation:eggShake 1.2s ease-in-out infinite}
-#chick{position:absolute;left:50%;top:58%;transform:translate(-50%,-50%) scale(0);font-size:3.2rem;opacity:0}
-@keyframes eggShake{
-  0%,100%{transform:translateY(0) rotate(0)}
-  15%{transform:translateY(-2px) rotate(-4deg)}
-  30%{transform:translateY(0) rotate(3deg)}
-  45%{transform:translateY(-1px) rotate(-2deg)}
-  60%{transform:translateY(0) rotate(2deg)}
-  75%{transform:translateY(-1px) rotate(-1deg)}
-}
-/* cracking state */
+/* PRELOADER cosmetics (basics already in <head>) */
+#preloader{backdrop-filter:blur(4px)}
+.egg{width:140px;height:190px;position:relative;display:inline-block}
+.egg-svg{display:block;margin:0 auto;filter:drop-shadow(0 10px 24px rgba(174,129,22,.15))}
+#chick{position:absolute;left:50%;top:60%;transform:translate(-50%,-50%) scale(0);font-size:3.4rem;opacity:0}
+
+#preloader.show-crack #crack{opacity:1;animation:drawCrack .8s ease forwards}
+@keyframes drawCrack{to{stroke-dashoffset:0}}
+
 #preloader.hatch .egg{animation:none}
-#preloader.hatch #eggLeft{transform-origin:58px 95px; animation:halfLeft .8s ease forwards}
-#preloader.hatch #eggRight{transform-origin:62px 95px; animation:halfRight .8s ease forwards}
-#preloader.hatch #chick{animation:chickPop .8s .25s ease-out forwards}
-@keyframes halfLeft{to{transform:translate(-24px,-10px) rotate(-25deg); opacity:.98}}
-@keyframes halfRight{to{transform:translate(24px,-10px) rotate(25deg); opacity:.98}}
-@keyframes chickPop{0%{transform:translate(-50%,-20%) scale(.2);opacity:0}
-  60%{transform:translate(-50%,-56%) scale(1.15);opacity:1}
-  100%{transform:translate(-50%,-56%) scale(1)}}
+#preloader.hatch #eggWhole{opacity:0;transition:opacity .25s ease}
+#preloader.hatch #leftHalf,#preloader.hatch #rightHalf{opacity:1}
+#preloader.hatch #leftHalf{
+  transform-origin:68px 100px;
+  animation:halfLeft .8s ease forwards;
+}
+#preloader.hatch #rightHalf{
+  transform-origin:72px 100px;
+  animation:halfRight .8s ease forwards;
+}
+@keyframes halfLeft{to{transform:translate(-28px,-12px) rotate(-24deg)}}
+@keyframes halfRight{to{transform:translate(28px,-12px) rotate(24deg)}}
+#preloader.hatch #chick{
+  animation:chickPop .8s .2s ease-out forwards;
+}
+@keyframes chickPop{
+  0%{transform:translate(-50%,-30%) scale(.2);opacity:0}
+  60%{transform:translate(-50%,-58%) scale(1.15);opacity:1}
+  100%{transform:translate(-50%,-58%) scale(1)}
+}
 
 /* ===== NAV ===== */
 nav.nav{
@@ -104,7 +110,6 @@ header{padding:64px 0 30px}
 }
 h1{
   margin:16px 0 6px; font-size:clamp(2.1rem,6vw,3.2rem); font-weight:900; letter-spacing:.2px;
-  word-break: normal; overflow-wrap: normal;
 }
 h1 .word{ display:inline-block; white-space:nowrap; }
 h1 .letter{
